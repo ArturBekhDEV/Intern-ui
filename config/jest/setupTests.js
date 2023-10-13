@@ -1,19 +1,17 @@
-// import "@testing-library/jest-dom/extend-expect";
-// import { fn } from "jest";
-// import { matchMedia } from "@testing-library/jest-dom/";
+import "@testing-library/jest-dom"
+import { jest } from '@jest/globals'
 
 window.matchMedia = (query) => ({
   matches: false,
   media: query,
   onchange: null,
-  // addEventListener: fn(),
-  // removeEventListener: fn(),
-  // dispatchEvent: fn(),
-  // addListener: fn(),
-  // removeListener: fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
 });
 
 Object.defineProperty(URL, "createObjectURL", {
   writable: true,
-  // value: fn(),
+  value: jest.fn(),
 });

@@ -21,7 +21,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "components": ["./src/components/*"],
-      "pages": ["./src/pages/*"]
+      "pages": ["./src/pages/*"],
+      "routes": ["./src/routes/index"],
+      "@/clear-styles": ["./src/styles/index.css"]
     }
   },
   "include": ["src", "tests"],

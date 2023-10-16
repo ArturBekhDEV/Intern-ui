@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
+
+import "@/clear-styles";
+
+import router from "@/routes/index";
+import theme from "@/styles/app-theme"
 
 const App = () => {
-  const [state, setState] = useState(0);
-  const inc = () => {
-    setState((prev) => prev + 1);
-  };
   return (
-    <>
-      <button data-testid="test-title" style={{ color: "green" }} onClick={inc}>
-        increase
-      </button>
-      {state}
-    </>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;800;900&display=swap');
+
+
+html {
+    line-height: 1.15;
+    font-family: Rubik !important;
+    font-size: 1em !important;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    display: block;
+}
+
+
+h1,h2,h3,h4 {
+    margin: 0
+}
+
+p {
+    margin: 0;
+}
+
+
+a {
+    background-color: transparent;
+}
+
+
+img {
+    border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: 1.15;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+}

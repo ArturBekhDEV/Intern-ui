@@ -1,9 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import WelcomePage from "@/pages/WelcomePage/WelcomePage";
+import { MemoryRouter } from "react-router-dom";
 
 describe("WelcomePage", () => {
   beforeEach(() => {
-    render(<WelcomePage />);
+    render(
+      <MemoryRouter>
+        <WelcomePage />
+      </MemoryRouter>
+    );
   });
 
   it("renders the welcome message", () => {

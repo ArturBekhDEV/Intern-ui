@@ -16,7 +16,7 @@ export const styles = {
     padding: "30px",
     marginTop: "40px",
     backgroundColor: "basic.dark",
-    border: "3px solid gray",
+    border: "1px solid gray",
     borderRadius: "6px",
     display: "flex",
     alignItems: "center",

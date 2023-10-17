@@ -5,7 +5,7 @@ export default createBrowserRouter([
   {
     path: "/",
     element: (
-      <Button variant="contained" sx={{ color: "basic.white" }}>
+      <Button variant="contained" sx={{ color: "basic.white" }} data-testid='test-title'>
         Test
       </Button>
     ),

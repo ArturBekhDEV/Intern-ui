@@ -18,7 +18,7 @@ export default {
   ],
   moduleNameMapper: {
     "^react-native$": "react-native-web",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+    "@/clear-styles": "<rootDir>/tests/setup/mockedCSS.js",
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   moduleFileExtensions: [

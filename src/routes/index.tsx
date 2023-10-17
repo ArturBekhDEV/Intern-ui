@@ -1,4 +1,4 @@
-import SignUpForm from "@/components/sign-up-form/SignUpForm";
+import SignUpForm from "@/components/SignUpForm/SignUpForm";
 import { createBrowserRouter } from "react-router-dom";
 import WelcomePage from "@/pages/WelcomePage/WelcomePage";
 
@@ -9,10 +9,10 @@ export default createBrowserRouter([
   },
   {
     path: "/sign-up",
-    element: <div>sign up page</div>,
+    element: <SignUpForm />,
   },
   {
     path: "/sign-in",
-    element: <SignUpForm />,
+    element: <div>sign up page</div>,
   },
 ]);

@@ -6,7 +6,7 @@ import { spliceSx } from "@/utils/splice-sx";
 
 interface BlockWrapperProps {
   children: ReactElement | ReactElement[];
-  sx?: SxProps
+  sx?: SxProps;
 }
 
 const BlockWrapper: FC<BlockWrapperProps> = ({ children, sx }) => {

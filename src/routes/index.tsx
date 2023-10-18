@@ -10,6 +10,7 @@ export default createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUpForm />,
+    index: true,
   },
   {
     path: "/sign-in",

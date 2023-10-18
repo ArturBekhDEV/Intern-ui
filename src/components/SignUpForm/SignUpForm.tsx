@@ -2,33 +2,43 @@ import { Field, Form, Formik } from "formik";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import PublicIcon from "@mui/icons-material/Public";
 
 import BlockWrapper from "@/components/BlockWrapper/BlockWrapper";
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
 import { TextField } from "@mui/material";
+import {
+  initialValues,
+  inputs,
+} from "@/components/SignUpForm/SignUpForm.constants";
 
 const SignUpForm = () => {
   return (
     <Box sx={styles.root}>
-      <PublicIcon sx={styles.icon} />
       <BlockWrapper sx={styles.block}>
         <Formik
-          initialValues={{ firstName: "" }}
-          onSubmit={async (values) => {
+          initialValues={initialValues}
+          onSubmit={async (values, { resetForm }) => {
             console.log("Values", values);
+            resetForm();
           }}
         >
           <Form style={styles.form}>
-            <Field
-              id="firstName"
-              placeholder="Enter you first name"
-              name="firstName"
-              render={({ field, form }) => {
-                <TextField name={"firstName"} />;
-              }}
-            ></Field>
-            <Button type="submit">Sign Up</Button>
+            {inputs.map((input) => (
+              <Field
+                key={input.id}
+                id={input.id}
+                autoComplete="off"
+                sx={styles.input}
+                as={TextField}
+                label={input.label}
+                name={input.id}
+                placeholder={input.placeholder}
+                required={input.required}
+              />
+            ))}
+            <Button variant="contained" type="submit" sx={styles.button}>
+              Sign Up
+            </Button>
           </Form>
         </Formik>
       </BlockWrapper>

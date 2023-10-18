@@ -10,6 +10,6 @@ export const styles = {
     alignItems: "center",
     flexDirection: "column",
     gap: "20px",
-    boxShadow: "1px 12px 12px rgba(0, 0, 0, 0.4)",
+    boxShadow: "1px 12px 12px rgba(0, 0, 0, 0.15)",
   },
 };

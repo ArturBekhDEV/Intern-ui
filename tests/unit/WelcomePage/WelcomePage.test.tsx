@@ -23,7 +23,7 @@ describe("WelcomePage", () => {
     expect(signUpButton).toBeInTheDocument();
 
     const signUpButtonLink = screen.getByRole("link", { name: "Sign Up" });
-    expect(signUpButtonLink).toHaveAttribute("href", "/signup");
+    expect(signUpButtonLink).toHaveAttribute("href", "/sign-up");
   });
 
   it("renders the 'Sign In' button with the correct link", () => {
@@ -31,6 +31,6 @@ describe("WelcomePage", () => {
     expect(signInButton).toBeInTheDocument();
 
     const signInButtonLink = screen.getByRole("link", { name: "Sign In" });
-    expect(signInButtonLink).toHaveAttribute("href", "/signin");
+    expect(signInButtonLink).toHaveAttribute("href", "/sign-in");
   });
 });

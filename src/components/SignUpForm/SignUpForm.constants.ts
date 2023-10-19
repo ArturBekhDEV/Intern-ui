@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { InputTypes } from "@/components/SignUpForm/SignUpForm.types";
 
 const validationMessages = {
   required: "This field is required.",
@@ -90,3 +91,11 @@ export const initialValues: Record<string, string> = {};
 inputs.forEach((input) => {
   initialValues[input.id] = "";
 });
+
+export const inputTypes: Record<string, InputTypes> = {
+  password: InputTypes.password,
+  confirmPassword: InputTypes.password,
+  email: InputTypes.email,
+  firstName: InputTypes.text,
+  lastName: InputTypes.text,
+};

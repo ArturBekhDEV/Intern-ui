@@ -5,6 +5,7 @@ import BlockWrapper from "@/components/BlockWrapper/BlockWrapper";
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
 import {
   initialValues,
+  inputTypes,
   inputs,
   validationSchema,
 } from "@/components/SignUpForm/SignUpForm.constants";
@@ -28,7 +29,7 @@ const SignUpForm = () => {
                   key={input.id}
                   id={input.id}
                   autoComplete="off"
-                  error={touched[input.id] && errors[input.id]}
+                  error={touched[input.id] && !!errors[input.id]}
                   helperText={touched[input.id] && errors[input.id]}
                   sx={styles.input}
                   as={TextField}
@@ -36,14 +37,15 @@ const SignUpForm = () => {
                   name={input.id}
                   placeholder={input.placeholder}
                   required={input.required}
-                  type={
-                    ["password", "confirmPassword"].includes(input.id)
-                      ? "password"
-                      : ""
-                  }
+                  type={inputTypes[input.id]}
                 />
               ))}
-              <Button variant="contained" type="submit" sx={styles.button}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={styles.button}
+                data-testid="submit-btn"
+              >
                 Sign Up
               </Button>
             </Form>

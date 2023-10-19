@@ -19,7 +19,7 @@ export default {
   moduleNameMapper: {
     "^react-native$": "react-native-web",
     "@/clear-styles": "<rootDir>/tests/setup/mockedCSS.js",
-    '^@/(.*)$': '<rootDir>/src/$1',
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
   moduleFileExtensions: [
     "tsx",

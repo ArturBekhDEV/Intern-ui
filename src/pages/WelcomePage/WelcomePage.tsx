@@ -3,22 +3,29 @@ import Box from "@mui/material/Box";
 import PublicIcon from "@mui/icons-material/Public";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 const WelcomePage = () => {
   return (
     <Box sx={styles.container}>
       <PublicIcon sx={styles.iconstyles} />
       <Box sx={styles.title}>
-        <span>Welcome there! Ready to explore the unknown ?</span>
+        <Typography variant="h2" color="initial" sx={styles.title}>
+          Welcome there! Ready to explore the unknown ?
+        </Typography>
       </Box>
       <Box sx={styles.btnContainer}>
-        <span>If you don't have an account :</span>
+        <Typography variant="h4" color="initial" sx={styles.description}>
+          If you don't have an account :
+        </Typography>
         <Link to="/signup">
           <Button variant="contained" color="primary" sx={styles.btn}>
             Sign Up
           </Button>
         </Link>
-        <span>If you already have an account :</span>
+        <Typography variant="h4" color="initial" sx={styles.description}>
+          If you already have an account :
+        </Typography>
         <Link to="/signin">
           <Button variant="contained" color="primary" sx={styles.btn}>
             Sign In

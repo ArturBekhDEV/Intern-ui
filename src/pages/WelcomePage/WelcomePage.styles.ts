@@ -12,24 +12,33 @@ export const styles = {
     color: "basic.white",
   },
   btnContainer: {
-    fontSize: "2rem",
+    maxWidth: "600px",
     padding: "30px",
     marginTop: "40px",
     backgroundColor: "basic.dark",
-    border: "1px solid gray",
+    border: "2px solid gray",
     borderRadius: "6px",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
     gap: "20px",
     boxShadow: "1px 12px 12px rgba(0, 0, 0, 0.4)",
+
+    "@media (min-width: 768px)": {
+      width: "100%",
+    },
   },
   title: {
-    fontSize: "3rem",
-    marginTop: "30px",
+    marginTop: "20px",
     color: palette.primary[700],
   },
   iconstyles: {
-    fontSize: "100px",
+    fontSize: "80px",
+    color: palette.primary[800],
+  },
+  description: {
+    color: palette.basic.grey,
+    fontSize: "24px",
+    fontWeight: "bold",
   },
 };

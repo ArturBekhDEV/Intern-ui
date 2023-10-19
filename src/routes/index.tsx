@@ -1,13 +1,17 @@
-import { Button } from "@mui/material";
 import { createBrowserRouter } from "react-router-dom";
+import WelcomePage from "@/pages/WelcomePage/WelcomePage";
 
 export default createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Button variant="contained" sx={{ color: "basic.white" }} data-testid='test-title'>
-        Test
-      </Button>
-    ),
+    element: <WelcomePage />,
+  },
+  {
+    path: "/signup",
+    element: <div>sign up page</div>,
+  },
+  {
+    path: "/signin",
+    element: <div>sign in page</div>,
   },
 ]);

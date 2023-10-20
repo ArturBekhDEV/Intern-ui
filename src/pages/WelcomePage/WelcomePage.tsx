@@ -4,10 +4,24 @@ import PublicIcon from "@mui/icons-material/Public";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import { ToastContainer, toast } from "react-toastify";
 
 const WelcomePage = () => {
+  const bt = () => {
+    toast('🦄 Wow so easy!', {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+      })
+  }
   return (
     <Box sx={styles.container}>
+      <ToastContainer />
+      <button onClick={bt}>ok</button>
       <PublicIcon sx={styles.iconstyles} />
       <Box sx={styles.title}>
         <Typography variant="h2" color="initial" sx={styles.title}>

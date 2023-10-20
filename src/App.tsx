@@ -1,5 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
+import 'react-toastify/dist/ReactToastify.css';
 
 import "@/clear-styles";
 

@@ -1,4 +1,8 @@
+import { useAxios } from "@/hooks/useAxios";
+import { authService } from "@/services/auth";
+import { GoogleAuthResponse } from "@/services/services.types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 interface GoogleResponse {
   credential: string;
 }
@@ -6,8 +10,26 @@ declare global {
   const google: typeof import("google-one-tap");
 }
 const GoogleBtn = () => {
-  const handleGoogleResponse = (response: GoogleResponse) => {
-    console.log("Token encoded is " + response.credential);
+  const navigate = useNavigate();
+
+  const onSuccess = () => {
+    navigate("/");
+  };
+
+  const onError = (msg: string) => {
+    console.log("error");
+  };
+
+  const { request } = useAxios<string, GoogleAuthResponse>({
+    service: authService.googleAuth,
+    onSuccess,
+    onError,
+  });
+
+  const handleGoogleResponse = async (response: GoogleResponse) => {
+    console.log(response);
+    const token = response.credential;
+    await request(token);
   };
 
   useEffect(() => {

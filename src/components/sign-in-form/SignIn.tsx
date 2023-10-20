@@ -23,60 +23,64 @@ const SignIn = () => {
   };
   const validateYupSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Please enter valid email adress*")
+      .email("Please enter a valid email address*")
       .required("Required"),
     password: Yup.string().required("Required*"),
   });
   return (
     <Box sx={styles.container}>
-      <Box sx={styles.containerBlock}>
-        <LockOpenIcon sx={styles.icon} />
-        <Typography variant="h2" sx={styles.title}>
-          Welcome back
-        </Typography>
-        <Typography sx={styles.description} mb={4}>
-          We missed you! Please enter your details.
-        </Typography>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validateYupSchema}
-        >
+      <LockOpenIcon sx={styles.icon} />
+      <Typography variant="h2" sx={styles.title}>
+        Welcome back
+      </Typography>
+      <Typography sx={styles.description} mb={4}>
+        We missed you! Please enter your details.
+      </Typography>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validateYupSchema}
+      >
+        {(formik) => (
           <Form>
-            <Field
-              as={TextField}
-              margin="normal"
-              name="email"
-              label="Email"
-              placeholder="Enter your email"
-              required
-              fullWidth
-              helperText={<ErrorMessage name="email" />}
-              sx={styles.input}
-            />
-            <Field
-              as={TextField}
-              margin="normal"
-              name="password"
-              fullWidth
-              label="Password"
-              placeholder="Enter your password"
-              required
-              helperText={<ErrorMessage name="password" />}
-              type="password"
-              sx={styles.input}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              sx={styles.btn}
-              type="submit"
-            >
-              Sign In
-            </Button>
+            <Box sx={styles.form}>
+              <Field
+                as={TextField}
+                margin="normal"
+                name="email"
+                label="Email"
+                placeholder="Enter your email"
+                required
+                fullWidth
+                helperText={<ErrorMessage name="email" />}
+                sx={styles.input}
+                error={formik.touched.email && formik.errors.email}
+              />
+              <Field
+                as={TextField}
+                margin="normal"
+                name="password"
+                fullWidth
+                label="Password"
+                placeholder="Enter your password"
+                required
+                helperText={<ErrorMessage name="password" />}
+                type="password"
+                sx={styles.input}
+                error={formik.touched.password && formik.errors.password}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                sx={styles.btn}
+                type="submit"
+              >
+                Sign In
+              </Button>
+            </Box>
           </Form>
-        </Formik>
-      </Box>
+        )}
+      </Formik>
     </Box>
   );
 };

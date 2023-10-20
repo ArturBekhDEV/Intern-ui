@@ -2,17 +2,10 @@ import palette from "@/styles/app-theme/app.palette";
 
 export const styles = {
   container: {
-    height: "100vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  containerBlock: {
-    display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    fontSize: "30px",
-    padding: "24px",
   },
   title: {
     color: palette.primary[600],
@@ -22,7 +15,7 @@ export const styles = {
     color: palette.basic.grey,
   },
   icon: {
-    fontSize: "36px",
+    fontSize: "42px",
     marginBottom: "10px",
     color: palette.primary[700],
   },
@@ -30,8 +23,13 @@ export const styles = {
     width: "200px",
     color: "basic.white",
     mt: "30px",
+    mb: "15px",
   },
   input: {
+    width: "550px",
+    "@media (max-width: 600px)": {
+      width: "300px",
+    },
     backgroundColor: palette.basic.light,
     color: palette.basic.grey,
     "& input": {
@@ -45,5 +43,17 @@ export const styles = {
       backgroundColor: "#1c1c1c",
       m: "0px",
     },
+    "& .MuiOutlinedInput-root": {
+      "&:hover:not(.Mui-focused) fieldset": {
+        borderColor: palette.basic.grey,
+      },
+    },
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
   },
 };

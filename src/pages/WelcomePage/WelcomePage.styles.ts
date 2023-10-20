@@ -12,12 +12,10 @@ export const styles = {
     color: "basic.white",
   },
   btnContainer: {
-    maxWidth: "600px",
+    maxWidth: "700px",
     padding: "30px",
     marginTop: "40px",
     backgroundColor: "basic.dark",
-    border: "2px solid gray",
-    borderRadius: "6px",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
@@ -31,6 +29,11 @@ export const styles = {
   title: {
     marginTop: "20px",
     color: palette.primary[700],
+    textAlign: "center",
+
+    "@media (max-width: 768px)": {
+      fontSize: "34px",
+    },
   },
   iconstyles: {
     fontSize: "80px",
@@ -38,7 +41,6 @@ export const styles = {
   },
   description: {
     color: palette.basic.grey,
-    fontSize: "24px",
-    fontWeight: "bold",
+    fontSize: "18px",
   },
 };

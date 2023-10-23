@@ -16,17 +16,17 @@ const WelcomePage = () => {
       </Box>
       <Box sx={styles.btnContainer}>
         <Typography variant="h4" color="initial" sx={styles.description}>
-          If you don't have an account :
+          If you don't have an account:
         </Typography>
-        <Link to="/signup">
+        <Link to="/sign-up">
           <Button variant="contained" color="primary" sx={styles.btn}>
             Sign Up
           </Button>
         </Link>
         <Typography variant="h4" color="initial" sx={styles.description}>
-          If you already have an account :
+          If you already have an account:
         </Typography>
-        <Link to="/signin">
+        <Link to="/sign-in">
           <Button variant="contained" color="primary" sx={styles.btn}>
             Sign In
           </Button>

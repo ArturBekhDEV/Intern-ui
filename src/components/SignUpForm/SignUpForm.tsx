@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
-import BlockWrapper from "@/components/BlockWrapper/BlockWrapper";
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
 import {
   initialValues,
@@ -13,17 +13,24 @@ import {
 const SignUpForm = () => {
   return (
     <Box sx={styles.root}>
-      <BlockWrapper sx={styles.block}>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={async (values, { resetForm }) => {
-            console.log("Values", values);
-            resetForm();
-          }}
-          validationSchema={validationSchema}
-        >
-          {({ errors, touched }) => (
-            <Form style={styles.form}>
+      <AppRegistrationIcon sx={styles.icon} />
+      <Typography variant="h2" sx={styles.title}>
+        Create Account
+      </Typography>
+      <Typography sx={styles.description} mb={4}>
+        Register for your new account.
+      </Typography>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={async (values, { resetForm }) => {
+          console.log("Values", values);
+          resetForm();
+        }}
+        validationSchema={validationSchema}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <Box sx={styles.form}>
               {inputs.map((input) => (
                 <Field
                   key={input.id}
@@ -38,6 +45,7 @@ const SignUpForm = () => {
                   placeholder={input.placeholder}
                   required={input.required}
                   type={inputTypes[input.id]}
+                  margin="dense"
                 />
               ))}
               <Button
@@ -48,10 +56,10 @@ const SignUpForm = () => {
               >
                 Sign Up
               </Button>
-            </Form>
-          )}
-        </Formik>
-      </BlockWrapper>
+            </Box>
+          </Form>
+        )}
+      </Formik>
     </Box>
   );
 };

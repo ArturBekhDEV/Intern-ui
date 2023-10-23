@@ -122,19 +122,33 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,6 +157,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,11 +195,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Field, Form, Formik } from "formik";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 &nbsp;
-import BlockWrapper from "@/components/BlockWrapper/BlockWrapper";
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
 import {
   initialValues,
@@ -196,17 +212,24 @@ import {
 const SignUpForm = () =&gt; {
   return (
     &lt;Box sx={styles.root}&gt;
-      &lt;BlockWrapper sx={styles.block}&gt;
-        &lt;Formik
-          initialValues={initialValues}
-          onSubmit={async (values, { resetForm }) =&gt; {
-            console.log("Values", values);
-            resetForm();
-          }}
-          validationSchema={validationSchema}
-        &gt;
-          {({ errors, touched }) =&gt; (
-            &lt;Form style={styles.form}&gt;
+      &lt;AppRegistrationIcon sx={styles.icon} /&gt;
+      &lt;Typography variant="h2" sx={styles.title}&gt;
+        Create Account
+      &lt;/Typography&gt;
+      &lt;Typography sx={styles.description} mb={4}&gt;
+        Register for your new account.
+      &lt;/Typography&gt;
+      &lt;Formik
+        initialValues={initialValues}
+        onSubmit={async (values, { resetForm }) =&gt; {
+          console.log("Values", values);
+          resetForm();
+        }}
+        validationSchema={validationSchema}
+      &gt;
+        {({ errors, touched }) =&gt; (
+          &lt;Form&gt;
+            &lt;Box sx={styles.form}&gt;
               {inputs.map((input) =&gt; (
                 &lt;Field
                   key={input.id}
@@ -221,6 +244,7 @@ const SignUpForm = () =&gt; {
                   placeholder={input.placeholder}
                   required={input.required}
                   type={inputTypes[input.id]}
+                  margin="dense"
                 /&gt;
               ))}
               &lt;Button
@@ -231,10 +255,10 @@ const SignUpForm = () =&gt; {
               &gt;
                 Sign Up
               &lt;/Button&gt;
-            &lt;/Form&gt;
-          )}
-        &lt;/Formik&gt;
-      &lt;/BlockWrapper&gt;
+            &lt;/Box&gt;
+          &lt;/Form&gt;
+        )}
+      &lt;/Formik&gt;
     &lt;/Box&gt;
   );
 };
@@ -247,7 +271,7 @@ export default SignUpForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-19T10:39:11.788Z
+                at 2023-10-20T10:51:52.461Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

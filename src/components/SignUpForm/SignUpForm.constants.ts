@@ -87,10 +87,13 @@ export const inputs = [
   },
 ];
 
-export const initialValues: Record<string, string> = {};
-inputs.forEach((input) => {
-  initialValues[input.id] = "";
-});
+export const initialValues: Record<string, string> = {
+  password: "",
+  confirmPassword: "",
+  email: "",
+  firstName: "",
+  lastName: "",
+};
 
 export const inputTypes: Record<string, InputTypes> = {
   password: InputTypes.password,

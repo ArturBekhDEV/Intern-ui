@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
@@ -9,8 +9,16 @@ import {
   inputs,
   validationSchema,
 } from "@/components/SignUpForm/SignUpForm.constants";
+import { FC } from "react";
 
-const SignUpForm = () => {
+interface SignUpFormProps {
+  onSubmit: (
+    dto: Record<string, string>,
+    helpers?: FormikHelpers<Record<string, string>>
+  ) => Promise<void>;
+}
+
+const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
   return (
     <Box sx={styles.root}>
       <AppRegistrationIcon sx={styles.icon} />
@@ -22,10 +30,7 @@ const SignUpForm = () => {
       </Typography>
       <Formik
         initialValues={initialValues}
-        onSubmit={async (values, { resetForm }) => {
-          console.log("Values", values);
-          resetForm();
-        }}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         {({ errors, touched }) => (

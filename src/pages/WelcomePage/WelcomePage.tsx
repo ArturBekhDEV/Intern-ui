@@ -4,10 +4,12 @@ import PublicIcon from "@mui/icons-material/Public";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import { ToastContainer } from "react-toastify";
 
 const WelcomePage = () => {
   return (
     <Box sx={styles.container}>
+      <ToastContainer />
       <PublicIcon sx={styles.iconstyles} />
       <Box sx={styles.title}>
         <Typography variant="h2" color="initial" sx={styles.title}>

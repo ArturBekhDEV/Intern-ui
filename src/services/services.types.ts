@@ -5,7 +5,8 @@ enum Roles {
 
 export interface GoogleAuthResponse {
   token: string;
-  role: Roles;
+  role: Roles | string;
+  firstName: string
 }
 
 export interface SignUpDto {
@@ -19,5 +20,17 @@ export interface SignUpDto {
 export interface SignUpResponse {
     token: string
     role: Roles
+    firstName: string
 }
-// export type Google
+
+export interface SignInResponse {
+  token: string
+  role: Roles
+  firstName: string
+}
+
+export interface CurrentUserResponse {
+  role: Roles
+  firstName: string
+  lastName: string
+}

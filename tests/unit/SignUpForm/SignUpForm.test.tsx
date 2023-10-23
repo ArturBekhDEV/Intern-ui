@@ -1,12 +1,7 @@
 import SignUpForm from "@/components/SignUpForm/SignUpForm";
 import { inputs } from "@/components/SignUpForm/SignUpForm.constants";
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { FormikHelpers } from "formik";
 
 const btnTestId = "submit-btn";
 
@@ -19,9 +14,17 @@ const mockedInputCorrectValues: Record<string, string> = {
 };
 const inputsPlaceholders = inputs.map((i) => i.placeholder);
 
+const mockedOnSubmit = async (
+  values: Record<string, string>,
+  helpers?: FormikHelpers<Record<string, string>>
+) => {
+  console.log(values);
+  helpers?.resetForm();
+};
+
 describe("SignUpForm", () => {
   beforeEach(() => {
-    render(<SignUpForm />);
+    render(<SignUpForm onSubmit={mockedOnSubmit} />);
   });
 
   it("should render sign up button", () => {
@@ -33,12 +36,14 @@ describe("SignUpForm", () => {
   it("should clean all inputs on submitting", async () => {
     const btn = screen.getByTestId(btnTestId);
 
-    inputsPlaceholders.map((key) => {
+    inputsPlaceholders.forEach(async (key) => {
       const input = screen.getByPlaceholderText(key);
-      fireEvent.change(input, {
-        target: { value: mockedInputCorrectValues[input.id] },
+      await waitFor(() => {
+        fireEvent.change(input, {
+          target: { value: mockedInputCorrectValues[input.id] },
+        });
+        expect(input).toHaveValue(mockedInputCorrectValues[input.id]);
       });
-      expect(input).toHaveValue(mockedInputCorrectValues[input.id]);
     });
     await waitFor(() => {
       fireEvent.click(btn);

@@ -1,12 +1,12 @@
 import SignInPage from "@/pages/SignInPage/SignInPage";
 import SignUpPage from "@/pages/SignUpPage/SignUpPage";
 import { createBrowserRouter } from "react-router-dom";
-import WelcomePage from "@/pages/WelcomePage/WelcomePage";
+import Home from "@/pages/Home/Home";
 
 export default createBrowserRouter([
   {
     path: "/",
-    element: <WelcomePage />,
+    element: <Home />,
   },
   {
     path: "/sign-up",

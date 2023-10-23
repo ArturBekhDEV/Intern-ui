@@ -1,8 +1,13 @@
-import { useAxios } from "@/hooks/useAxios";
+import { baseToastifyConfig } from "@/configs/toastify";
+import { SuccessfulSignInMsg } from "@/constants/response-messages";
+import { useAuth } from "@/context/hook";
+import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
 import { GoogleAuthResponse } from "@/services/services.types";
+import { saveToStorage } from "@/utils/local-storage";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 interface GoogleResponse {
   credential: string;
 }
@@ -11,13 +16,22 @@ declare global {
 }
 const GoogleBtn = () => {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
-  const onSuccess = () => {
+  const onSuccess = (data?: GoogleAuthResponse) => {
     navigate("/");
+    saveToStorage("token", data?.token);
+    setAuth(data!.role, data!.firstName);
+    setTimeout(() => {
+      toast.success(
+        SuccessfulSignInMsg,
+        baseToastifyConfig
+      );
+    }, 500);
   };
 
   const onError = (msg: string) => {
-    console.log("error");
+    toast.error(msg, baseToastifyConfig);
   };
 
   const { request } = useAxios<string, GoogleAuthResponse>({
@@ -27,7 +41,6 @@ const GoogleBtn = () => {
   });
 
   const handleGoogleResponse = async (response: GoogleResponse) => {
-    console.log(response);
     const token = response.credential;
     await request(token);
   };
@@ -48,7 +61,12 @@ const GoogleBtn = () => {
       });
     }
   }, []);
-  return <div id="googleButton" />;
+  return (
+    <>
+      <div id="googleButton" />
+      <ToastContainer />
+    </>
+  );
 };
 
 export default GoogleBtn;

@@ -6,20 +6,16 @@ import Typography from "@mui/material/Typography";
 import { styles } from "./SignIn.styles";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import { FC } from "react";
 
-interface formTypes {
-  email: string;
-  password: string;
+interface SignInProps {
+  onSubmit: (values: Record<string, string>, helpers?: FormikHelpers<Record<string, string>>) => Promise<void>
 }
 
-const SignIn = () => {
-  const initialValues: formTypes = {
+const SignIn:FC<SignInProps> = ({ onSubmit }) => {
+  const initialValues: Record<string, string> = {
     email: "",
     password: "",
-  };
-  const onSubmit = (values: formTypes, props: FormikHelpers<formTypes>) => {
-    console.log(values);
-    props.resetForm();
   };
   const validateYupSchema = Yup.object().shape({
     email: Yup.string()

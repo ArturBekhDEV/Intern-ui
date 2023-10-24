@@ -10,6 +10,7 @@ export const styles = {
   },
   contentSoonText: {
     mt: "40px",
+    typography: "h3",
     textAlign: "center",
     width: "100%",
   },

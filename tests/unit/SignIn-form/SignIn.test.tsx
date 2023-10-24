@@ -1,6 +1,6 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import SignIn from "@/components/sign-in-form/SignIn";
 import { FormikHelpers } from "formik";
+import SignIn from "@/components/SignInForm/SignIn";
 
 const mockedOnSubmit = async (
   values: Record<string, string>,

@@ -29,7 +29,6 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     page: 0,
     countPerPage: 10,
   };
-  console.log(userTableData);
 
   const userDataTable = (data: dataRowType[] | null) => {
     setUserTableData(data);
@@ -70,7 +69,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
         </AppButton>
       </Header>
       <PageWrapper breakpoint={"lg"}>
-        <Box data-testid="admin-home-page" sx={styles.contentContainer}>
+        <Box sx={styles.contentContainer}>
           <AppButton>New user</AppButton>
           <Box>
             <AppButton disabled sx={styles.editBtn}>
@@ -80,15 +79,18 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               Delete
             </AppButton>
           </Box>
+          <Box sx={{ marginTop: "30px" }}>
+            {userData ? (
+              <UserTable
+                response={userData.items}
+                handleUserData={userDataTable}
+              />
+            ) : (
+              <Loader />
+            )}
+          </Box>
         </Box>
       </PageWrapper>
-      <Box sx={{ marginTop: "30px" }}>
-        {userData ? (
-          <UserTable response={userData.items} handleUserData={userDataTable} />
-        ) : (
-          <Loader />
-        )}
-      </Box>
       <ToastContainer />
     </>
   );

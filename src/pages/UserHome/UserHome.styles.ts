@@ -6,10 +6,18 @@ export const styles = {
     color: palette.primary[300],
   },
   headerText: {
+<<<<<<< HEAD
+=======
+    typography: "h6",
+>>>>>>> 0029050 (feature: add admin and user home pages)
     m: "0 10px",
   },
   contentSoonText: {
     mt: "40px",
+<<<<<<< HEAD
+=======
+    typography: "h3",
+>>>>>>> 0029050 (feature: add admin and user home pages)
     textAlign: "center",
     width: "100%",
   },

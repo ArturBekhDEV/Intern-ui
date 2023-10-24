@@ -1,6 +1,6 @@
-import { fireEvent, screen } from "@testing-library/react";
 import SignIn from "@/components/SignInForm/SignIn";
 import { renderWithProvidersAndRouter } from "@tests/utils";
+import { fireEvent, screen } from "@testing-library/react";
 
 const mockedOnSubmit = async (_, helpers) => {
   helpers?.resetForm();

@@ -141,17 +141,17 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
                 />
               </Modal>
             )}
-            <AppButton disabled sx={styles.deleteBtn}>
-              Delete
-            </AppButton>
           </Box>
-        </Box>
-        <Box sx={{ marginTop: "30px" }}>
-          {userData?.items?.length ? (
-            <UserTable response={userData.items} handleUserData={handleUsers} />
-          ) : (
-            <Loader />
-          )}
+          <Box sx={{ marginTop: "30px" }}>
+            {userData?.items?.length ? (
+              <UserTable
+                response={userData.items}
+                handleUserData={handleUsers}
+              />
+            ) : (
+              <Loader />
+            )}
+          </Box>
         </Box>
       </PageWrapper>
       <ToastContainer />

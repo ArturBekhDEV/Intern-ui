@@ -28,7 +28,6 @@ const Home = () => {
   const onLogOut = () => {
     removeAuth();
   };
-
   useAxios({
     service: authService.currentUser,
     onSuccess,

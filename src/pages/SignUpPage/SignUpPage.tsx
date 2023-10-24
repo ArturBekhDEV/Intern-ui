@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
-import GoogleBtn from "@/components/google-button/GoogleBtn";
+import GoogleBtn from "@/components/GoogleBtn/GoogleBtn";
 import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
 import { SignUpResponse } from "@/services/services.types";

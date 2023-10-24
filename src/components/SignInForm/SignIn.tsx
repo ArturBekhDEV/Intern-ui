@@ -1,18 +1,21 @@
 import TextField from "@mui/material/TextField";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { styles } from "./SignIn.styles";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { FC } from "react";
+import AppButton from "@/components/AppButton/AppButton";
 
 interface SignInProps {
-  onSubmit: (values: Record<string, string>, helpers?: FormikHelpers<Record<string, string>>) => Promise<void>
+  onSubmit: (
+    values: Record<string, string>,
+    helpers?: FormikHelpers<Record<string, string>>
+  ) => Promise<void>;
 }
 
-const SignIn:FC<SignInProps> = ({ onSubmit }) => {
+const SignIn: FC<SignInProps> = ({ onSubmit }) => {
   const initialValues: Record<string, string> = {
     email: "",
     password: "",
@@ -65,14 +68,9 @@ const SignIn:FC<SignInProps> = ({ onSubmit }) => {
                 sx={styles.input}
                 error={formik.touched.password && formik.errors.password}
               />
-              <Button
-                variant="contained"
-                color="primary"
-                sx={styles.btn}
-                type="submit"
-              >
+              <AppButton sx={styles.btn} type="submit">
                 Sign In
-              </Button>
+              </AppButton>
             </Box>
           </Form>
         )}

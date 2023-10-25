@@ -10,7 +10,7 @@ const mockedOnSubmit = async (
   helpers?.resetForm();
 };
 
-describe("SignIng", () => {
+describe("SignIn", () => {
   beforeEach(() => {
     render(<SignIn onSubmit={mockedOnSubmit} />);
   });

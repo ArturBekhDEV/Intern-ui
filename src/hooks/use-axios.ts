@@ -18,6 +18,7 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
       const response: AxiosResponse = await service(params);
 
       props.onSuccess && props.onSuccess(response?.data);
+
       return response?.data;
     } catch (error) {
       setError(true);

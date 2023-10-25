@@ -2,6 +2,8 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import { AuthProvider } from "@/context/context";
 import { useAuth } from "@/context/hook";
 
+import { renderWithProviders } from "@tests/utils";
+
 const childrenMockDataTestID = "children-mock";
 
 const childrenMock = (
@@ -13,7 +15,9 @@ const ChildrenWithSetAuth = () => {
 
   return (
     <div>
-      <button onClick={setAuth} data-testid="btn">Call setAuth</button>
+      <button onClick={setAuth} data-testid="btn">
+        Call setAuth
+      </button>
     </div>
   );
 };
@@ -22,7 +26,9 @@ const ChildrenWithRemoveAuth = () => {
 
   return (
     <div>
-      <button onClick={removeAuth} data-testid="btn">Call removeAuth</button>
+      <button onClick={removeAuth} data-testid="btn">
+        Call removeAuth
+      </button>
     </div>
   );
 };
@@ -31,7 +37,9 @@ const ChildrenWithSetUser = () => {
 
   return (
     <div>
-      <button onClick={setUser} data-testid="btn">Call removeAuth</button>
+      <button onClick={setUser} data-testid="btn">
+        Call removeAuth
+      </button>
     </div>
   );
 };
@@ -58,11 +66,11 @@ describe("AuthProvider", () => {
       </AuthProvider>
     );
 
-    const button = screen.getByTestId('btn')
+    const button = screen.getByTestId("btn");
 
-    expect(button).toBeInTheDocument()
+    expect(button).toBeInTheDocument();
 
-    fireEvent.click(button)
+    fireEvent.click(button);
   });
 
   it("should perform removeAuth function", () => {
@@ -72,11 +80,11 @@ describe("AuthProvider", () => {
       </AuthProvider>
     );
 
-    const button = screen.getByTestId('btn')
+    const button = screen.getByTestId("btn");
 
-    expect(button).toBeInTheDocument()
+    expect(button).toBeInTheDocument();
 
-    fireEvent.click(button)
+    fireEvent.click(button);
   });
 
   it("should perform setUser function", () => {
@@ -86,10 +94,10 @@ describe("AuthProvider", () => {
       </AuthProvider>
     );
 
-    const button = screen.getByTestId('btn')
+    const button = screen.getByTestId("btn");
 
-    expect(button).toBeInTheDocument()
+    expect(button).toBeInTheDocument();
 
-    fireEvent.click(button)
+    fireEvent.click(button);
   });
 });

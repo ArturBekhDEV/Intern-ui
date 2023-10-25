@@ -1,11 +1,10 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { newUserInputs } from "@/constants/validations";
 import AdminHome from "@/pages/AdminHome/AdminHome";
-import { render } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import { mockAxiosClientWithCredentials } from "../../setup/utils";
 import userEvent from "@testing-library/user-event";
 
-const onLogOutMock = jest.fn();
 
 const mockedInputCorrectValues = {
   firstName: "Testing",
@@ -15,6 +14,8 @@ const mockedInputCorrectValues = {
   role: "ADMIN",
 };
 const inputsPlaceholders = newUserInputs.map((i) => i.placeholder);
+
+const onLogOutMock = jest.fn();
 
 jest.mock("@/utils/getEnv", () => ({
   async getEnv() {
@@ -27,7 +28,9 @@ jest.mock("@/utils/getEnv", () => ({
 
 describe("AdminHome", () => {
   beforeEach(() => {
-    render(<AdminHome onLogOut={onLogOutMock} />);
+    act(() => {
+      render(<AdminHome onLogOut={onLogOutMock} />);
+    });
   });
 
   it("should logout on click button", () => {

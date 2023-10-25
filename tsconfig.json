@@ -23,7 +23,8 @@
       "components": ["./src/components/*"],
       "pages": ["./src/pages/*"],
       "routes": ["./src/routes/index"],
-      "@/clear-styles": ["./src/styles/index.css"]
+      "@/clear-styles": ["./src/styles/index.css"],
+      "@tests/*": ["./tests/*"]
     }
   },
   "include": ["src", "tests"],

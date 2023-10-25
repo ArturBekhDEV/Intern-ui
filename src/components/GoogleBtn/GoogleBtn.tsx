@@ -4,6 +4,7 @@ import { useAuth } from "@/context/hook";
 import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
 import { GoogleAuthResponse } from "@/services/services.types";
+import { getEnv } from "@/utils/getEnv";
 import { saveToStorage } from "@/utils/local-storage";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +49,7 @@ const GoogleBtn = () => {
   useEffect(() => {
     const googleButton = document.getElementById("googleButton");
     google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      client_id: getEnv('googleClientId'),
       callback: handleGoogleResponse,
     });
 

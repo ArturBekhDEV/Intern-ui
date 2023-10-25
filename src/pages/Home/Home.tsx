@@ -10,8 +10,10 @@ import { useState } from "react";
 import Loader from "@/components/Loader/Loader";
 
 const Home = () => {
-  const { state, setUser } = useAuth();
+  const { state, setUser, removeAuth } = useAuth();
   const [loading, setLoading] = useState(true);
+
+  console.log(state)
 
   const onSuccess = (data?: CurrentUserResponse) => {
     setUser(data!.role, data!.firstName, data!.lastName);
@@ -21,6 +23,8 @@ const Home = () => {
   const onError = () => {
     setLoading(false);
   };
+
+  const onLogOut = () => removeAuth();
 
   useAxios({
     service: authService.currentUser,
@@ -32,10 +36,10 @@ const Home = () => {
   if (loading) return <Loader />;
 
   if (state.isAuth && state.role == Roles.Admin) {
-    return <AdminHome />;
+    return <AdminHome onLogOut={onLogOut} data-testid="admin-home-page" />;
   }
   if (state.isAuth && state.role == Roles.User) {
-    return <UserHome />;
+    return <UserHome onLogOut={onLogOut} data-testid="user-home-page"/>;
   }
 
   return <WelcomePage />;

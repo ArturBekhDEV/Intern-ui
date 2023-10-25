@@ -7,23 +7,23 @@ import { styles } from "@/pages/AdminHome/AdminHome.styles";
 import Header from "@/components/Header/Header";
 import AppButton from "@/components/AppButton/AppButton";
 
-export interface AdminHomeProps {}
-const AdminHome: FC<AdminHomeProps> = () => {
-  const { state, removeAuth } = useAuth();
-
-  const onLogOut = () => removeAuth();
+export interface AdminHomeProps {
+  onLogOut: () => void;
+}
+const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
+  const { state } = useAuth();
 
   return (
     <>
       <Header contentMaxWidth="lg">
-        <Typography sx={styles.headerText}>
+        <Typography variant='h6'>
           Hi,
           <span style={styles.name}>{` ${state.firstName}${
             state.lastName ? ` ${state.lastName}` : ""
           }`}</span>
           . You are logged in as an administrator
         </Typography>
-        <AppButton onClick={onLogOut} sx={styles.headerBtn} variant="contained">
+        <AppButton onClick={onLogOut} sx={styles.headerBtn} variant="contained" data-testid="logoutBtn">
           Log Out
         </AppButton>
       </Header>
@@ -39,7 +39,6 @@ const AdminHome: FC<AdminHomeProps> = () => {
             </AppButton>
           </Box>
         </Box>
-        <ToastContainer />
       </PageWrapper>
       <ToastContainer />
     </>

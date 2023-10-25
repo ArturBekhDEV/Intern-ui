@@ -8,23 +8,28 @@ import Header from "@/components/Header/Header";
 import Public from "@mui/icons-material/Public";
 import AppButton from "@/components/AppButton/AppButton";
 
-export interface UserHomeProps {}
-const UserHome: FC<UserHomeProps> = () => {
-  const { state, removeAuth } = useAuth();
+export interface UserHomeProps {
+  onLogOut: () => void;
+}
 
-  const onLogOut = () => removeAuth();
+const UserHome: FC<UserHomeProps> = ({ onLogOut }) => {
+  const { state } = useAuth();
 
   return (
     <>
       <Header contentMaxWidth="lg">
-        <Typography sx={styles.headerText}>
+        <Typography variant="h6" sx={styles.headerText}>
           Hi,
           <span style={styles.name}>{` ${state.firstName}${
             state.lastName ? ` ${state.lastName}` : ""
           }`}</span>
           . Welcome to our website
         </Typography>
-        <AppButton onClick={onLogOut} sx={styles.headerBtn}>
+        <AppButton
+          data-testid="logoutBtn"
+          onClick={onLogOut}
+          sx={styles.headerBtn}
+        >
           Log Out
         </AppButton>
       </Header>
@@ -32,7 +37,11 @@ const UserHome: FC<UserHomeProps> = () => {
         <Box sx={styles.iconContainer}>
           <Public sx={styles.icon} />
         </Box>
-        <Typography sx={styles.contentSoonText}>
+        <Typography
+          sx={styles.contentSoonText}
+          variant="h6"
+          data-testid="contentTxt"
+        >
           Content will be soon...
         </Typography>
         <ToastContainer />

@@ -11,9 +11,6 @@ export const styles = {
   name: {
     color: palette.primary[300],
   },
-  headerText: {
-    typography: "h6",
-  },
   headerBtn: {
     color: palette.basic.white,
   },

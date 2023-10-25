@@ -6,12 +6,10 @@ export const styles = {
     color: palette.primary[300],
   },
   headerText: {
-    typography: "h6",
     m: "0 10px",
   },
   contentSoonText: {
     mt: "40px",
-    typography: "h3",
     textAlign: "center",
     width: "100%",
   },

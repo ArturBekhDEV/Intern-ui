@@ -9,7 +9,7 @@ interface LoaderProps {
 const Loader: FC<LoaderProps> = ({ size = 100 }) => {
   return (
     <Box sx={styles.root}>
-      <CircularProgress size={size} />
+      <CircularProgress data-testid='loader' size={size} />
     </Box>
   );
 };

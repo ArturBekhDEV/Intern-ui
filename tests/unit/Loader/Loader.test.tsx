@@ -6,7 +6,7 @@ describe("Loader", () => {
     render(<Loader />);
   });
 
-  it("renders all inputs properly", () => {
+  it("should render loader", () => {
     const loader = screen.getByTestId("loader");
 
     expect(loader).toBeInTheDocument();

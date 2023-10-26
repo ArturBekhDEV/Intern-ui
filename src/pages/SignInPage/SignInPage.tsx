@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
+import { Link as RouterLink} from 'react-router-dom'
 import GoogleBtn from "@/components/GoogleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
@@ -60,7 +61,7 @@ const SignInPage = () => {
       />
       <Typography variant="body1" color="grey" sx={{ mt: "16px" }}>
         Don't have an account yet?{" "}
-        <Link href="/sign-up" color="primary">
+        <Link to="/sign-up" color="primary" component={RouterLink}>
           Sign up
         </Link>{" "}
         for our services for free!

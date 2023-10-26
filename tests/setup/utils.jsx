@@ -4,10 +4,8 @@ import { AuthProvider } from "@/context/context";
 import theme from "@/styles/app-theme";
 import MockAdapter from "axios-mock-adapter";
 import { axiosClient, axiosClientWithCredentials } from "@/services";
-import { createMemoryRouter } from "react-router-dom";
-import { createRoutesFromElements } from "react-router-dom";
-import { routerConfig } from "@/routes";
-import { RouterProvider } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 export const renderWithProviders = (component, authContextValue) => {
   const Wrapper = ({ children }) => (
@@ -18,18 +16,14 @@ export const renderWithProviders = (component, authContextValue) => {
   render(component, { wrapper: Wrapper });
 };
 
-export const renderWithProvidersRouter = (authContextValue) => {
-  const router = createMemoryRouter(createRoutesFromElements(routerConfig), {
-    initialEntries: ["/"],
-  });
-  const Component = () => (
-    <ThemeProvider theme={theme}>
-      <AuthProvider value={authContextValue}>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </ThemeProvider>
+export const renderWithProvidersAndRouter = (children, authContextValue) => {
+  const history = createMemoryHistory();
+  const component = (
+    <Router location={history.location} navigator={history}>
+      <AuthProvider value={authContextValue}>{children}</AuthProvider>
+    </Router>
   );
-  render(Component);
+  render(component);
 };
 
 export const mockAxiosClient = new MockAdapter(axiosClient);

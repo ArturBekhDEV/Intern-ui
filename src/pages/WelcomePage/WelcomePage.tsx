@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 const WelcomePage = () => {
   return (
-    <Box sx={styles.container}>
+    <Box sx={styles.container} data-testid='welcome-page'>
       <ToastContainer />
       <PublicIcon sx={styles.iconstyles} />
       <Box sx={styles.title}>

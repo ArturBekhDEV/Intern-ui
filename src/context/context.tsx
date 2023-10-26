@@ -45,7 +45,6 @@ const AuthProvider: FC<AuthProviderProps> = ({ children, value }) => {
   };
 
   const defaultValue = value ? value : { state, setAuth, removeAuth, setUser };
-  console.log("val", defaultValue);
   return (
     <AuthContext.Provider value={defaultValue}>{children}</AuthContext.Provider>
   );

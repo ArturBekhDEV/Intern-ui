@@ -34,7 +34,7 @@ const UserHome: FC<UserHomeProps> = ({ onLogOut }) => {
         </AppButton>
       </Header>
       <PageWrapper>
-        <Box sx={styles.iconContainer}>
+        <Box data-testid="user-home-page" sx={styles.iconContainer}>
           <Public sx={styles.icon} />
         </Box>
         <Typography

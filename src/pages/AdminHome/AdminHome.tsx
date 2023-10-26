@@ -28,7 +28,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
         </AppButton>
       </Header>
       <PageWrapper>
-        <Box sx={styles.contentContainer}>
+        <Box data-testid="admin-home-page" sx={styles.contentContainer}>
           <AppButton>New user</AppButton>
           <Box>
             <AppButton disabled sx={styles.editBtn}>

@@ -13,8 +13,6 @@ const Home = () => {
   const { state, setUser, removeAuth } = useAuth();
   const [loading, setLoading] = useState(true);
 
-  console.log(state)
-
   const onSuccess = (data?: CurrentUserResponse) => {
     setUser(data!.role, data!.firstName, data!.lastName);
     setLoading(false);
@@ -36,10 +34,10 @@ const Home = () => {
   if (loading) return <Loader />;
 
   if (state.isAuth && state.role == Roles.Admin) {
-    return <AdminHome onLogOut={onLogOut} data-testid="admin-home-page" />;
+    return <AdminHome onLogOut={onLogOut} />;
   }
   if (state.isAuth && state.role == Roles.User) {
-    return <UserHome onLogOut={onLogOut} data-testid="user-home-page"/>;
+    return <UserHome onLogOut={onLogOut} />;
   }
 
   return <WelcomePage />;

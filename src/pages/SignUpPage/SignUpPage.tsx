@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 import GoogleBtn from "@/components/GoogleBtn/GoogleBtn";
 import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
@@ -62,7 +63,7 @@ const SignInPage = () => {
         />
         <Typography variant="body1" color="grey" sx={{ mt: "16px" }}>
           Do you have already account?{" "}
-          <Link href="/sign-in" color="primary">
+          <Link to="/sign-in" color="primary" component={RouterLink}>
             Sign in
           </Link>{" "}
           for our services for free!

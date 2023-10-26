@@ -28,6 +28,7 @@ export const renderWithProvidersAndRouter = (children, authContextValue) => {
     </Router>
   );
   render(component);
+};
 
 export const mockAxiosClient = new MockAdapter(axiosClient);
 export const mockAxiosClientWithCredentials = new MockAdapter(

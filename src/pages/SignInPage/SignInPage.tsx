@@ -1,10 +1,11 @@
 import { styles } from "./SignInPage.styles";
-import SignIn from "@/components/sign-in-form/SignIn";
+import SignIn from "@/components/SignInForm/SignIn";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
-import GoogleBtn from "@/components/google-button/GoogleBtn";
+import { Link as RouterLink} from 'react-router-dom'
+import GoogleBtn from "@/components/GoogleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
 import { toast } from "react-toastify";
@@ -26,6 +27,7 @@ const SignInPage = () => {
 
   const onSuccess = (data?: SignInResponse) => {
     navigate("/");
+    window.location.reload()
     saveToStorage("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {
@@ -60,7 +62,7 @@ const SignInPage = () => {
       />
       <Typography variant="body1" color="grey" sx={{ mt: "16px" }}>
         Don't have an account yet?{" "}
-        <Link href="/sign-up" color="primary">
+        <Link to="/sign-up" color="primary" component={RouterLink}>
           Sign up
         </Link>{" "}
         for our services for free!

@@ -20,6 +20,9 @@ export default {
     "^react-native$": "react-native-web",
     "@/clear-styles": "<rootDir>/tests/setup/mockedCSS.js",
     "^@/(.*)$": "<rootDir>/src/$1",
+    "^@tests/utils": "<rootDir>/tests/setup/utils.jsx",
+    "react-toastify/dist/ReactToastify.css":
+      "<rootDir>/tests/setup/mockedCSS.js",
   },
   moduleFileExtensions: [
     "tsx",

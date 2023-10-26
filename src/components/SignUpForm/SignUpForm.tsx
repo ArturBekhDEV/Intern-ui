@@ -1,5 +1,5 @@
 import { Field, Form, Formik, FormikHelpers } from "formik";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
@@ -10,6 +10,7 @@ import {
   validationSchema,
 } from "@/components/SignUpForm/SignUpForm.constants";
 import { FC } from "react";
+import AppButton from "../AppButton/AppButton";
 
 interface SignUpFormProps {
   onSubmit: (
@@ -53,14 +54,13 @@ const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
                   margin="dense"
                 />
               ))}
-              <Button
-                variant="contained"
+              <AppButton
                 type="submit"
                 sx={styles.button}
                 data-testid="submit-btn"
               >
                 Sign Up
-              </Button>
+              </AppButton>
             </Box>
           </Form>
         )}

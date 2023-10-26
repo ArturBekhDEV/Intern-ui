@@ -1,7 +1,12 @@
 import { green } from "@mui/material/colors";
 const palette = {
   primary: green,
-  backgroundColor: "#1c1c1c",
+  // backgroundColor: {
+  //   paper: "#1c1c1c",
+  // },
+  // background: {
+  //   paper: "#1c1c1c",
+  // },
   basic: {
     light: "#282828",
     dark: "#232323ff",

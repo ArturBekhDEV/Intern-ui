@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       "@/": path.resolve(__dirname, "src"),
       "@/clear-styles": path.resolve(__dirname, "src", "styles", "index.css"),
+      "@tests/": path.resolve(__dirname, "tests")
     },
   },
   plugins: [react(), tsconfigPaths()],

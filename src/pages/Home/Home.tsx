@@ -8,9 +8,11 @@ import { useAxios } from "@/hooks/use-axios";
 import { CurrentUserResponse } from "@/services/services.types";
 import { useState } from "react";
 import Loader from "@/components/Loader/Loader";
+import { toast } from "react-toastify";
+import { baseToastifyConfig } from "@/configs/toastify";
 
 const Home = () => {
-  const { state, setUser } = useAuth();
+  const { state, setUser, removeAuth } = useAuth();
   const [loading, setLoading] = useState(true);
 
   const onSuccess = (data?: CurrentUserResponse) => {
@@ -18,8 +20,13 @@ const Home = () => {
     setLoading(false);
   };
 
-  const onError = () => {
+  const onError = (msg: string) => {
+    if (state.isAuth) toast.error(msg, baseToastifyConfig);
     setLoading(false);
+  };
+
+  const onLogOut = () => {
+    removeAuth();
   };
 
   useAxios({
@@ -32,10 +39,10 @@ const Home = () => {
   if (loading) return <Loader />;
 
   if (state.isAuth && state.role == Roles.Admin) {
-    return <AdminHome />;
+    return <AdminHome onLogOut={onLogOut} />;
   }
   if (state.isAuth && state.role == Roles.User) {
-    return <UserHome />;
+    return <UserHome onLogOut={onLogOut} />;
   }
 
   return <WelcomePage />;

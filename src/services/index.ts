@@ -1,12 +1,13 @@
+import { getEnv } from "@/utils/getEnv";
 import { getFromStorage } from "@/utils/local-storage";
 import axios from "axios";
 
 export const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: getEnv('apiUrl'),
 });
 
 export const axiosClientWithCredentials = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: getEnv('apiUrl'),
   headers: {
     Authorization: `Bearer ${getFromStorage('token')}`
   },

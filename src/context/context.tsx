@@ -10,20 +10,21 @@ import { getFromStorage, removeFromStorage } from "@/utils/local-storage";
 const initialValues = {
   role: "",
   isAuth: !!getFromStorage("token"),
-  firstName: '',
-  lastName: ''
+  firstName: "",
+  lastName: "",
 };
 
 const contextInitialValues = {
   state: initialValues,
   setAuth: (role: Roles | string) => console.log(role),
   removeAuth: () => {},
-  setUser: (role: Roles | string, firstName: string, lastName?: string) => console.log(role, firstName, lastName)
+  setUser: (role: Roles | string, firstName: string, lastName?: string) =>
+    console.log(role, firstName, lastName),
 };
 
 const AuthContext = createContext<ContextInitialValues>(contextInitialValues);
 
-const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: FC<AuthProviderProps> = ({ children, value }) => {
   const [state, setState] = useState<InitialValues>(initialValues);
 
   const setAuth = (role: Roles | string, firstName: string) => {
@@ -32,15 +33,21 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const removeAuth = () => {
     removeFromStorage("token");
-    setState({ role: "", isAuth: false, firstName: '', lastName: '' });
+    setState({ role: "", isAuth: false, firstName: "", lastName: "" });
   };
 
-  const setUser = (role: Roles | string, firstName: string, lastName?: string) => {
-    setState(prev => ({...prev, role, firstName, lastName }))
-  }
+  const setUser = (
+    role: Roles | string,
+    firstName: string,
+    lastName?: string
+  ) => {
+    setState((prev) => ({ ...prev, role, firstName, lastName }));
+  };
 
-  const value = { state, setAuth, removeAuth, setUser };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const defaultValue = value ? value : { state, setAuth, removeAuth, setUser };
+  return (
+    <AuthContext.Provider value={defaultValue}>{children}</AuthContext.Provider>
+  );
 };
 
 export { AuthProvider, AuthContext };

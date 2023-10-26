@@ -34,6 +34,7 @@ const SignInPage = () => {
 
   const onSuccess = (data?: SignUpResponse) => {
     navigate("/");
+    window.location.reload()
     saveToStorage("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {

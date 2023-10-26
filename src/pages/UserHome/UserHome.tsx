@@ -37,9 +37,6 @@ const UserHome: FC<UserHomeProps> = ({ onLogOut }) => {
         <Box data-testid="user-home-page" sx={styles.iconContainer}>
           <Public sx={styles.icon} />
         </Box>
-        <Box sx={styles.iconContainer}>
-          <Public sx={styles.icon} />
-        </Box>
         <Typography
           sx={styles.contentSoonText}
           variant="h6"

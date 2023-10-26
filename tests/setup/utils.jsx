@@ -4,15 +4,14 @@ import { AuthProvider } from "@/context/context";
 import theme from "@/styles/app-theme";
 import MockAdapter from "axios-mock-adapter";
 import { axiosClient, axiosClientWithCredentials } from "@/services";
-<<<<<<< HEAD
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-=======
 import { createMemoryRouter } from "react-router-dom";
 import { createRoutesFromElements } from "react-router-dom";
 import { routerConfig } from "@/routes";
 import { RouterProvider } from "react-router-dom";
->>>>>>> e042f95 (feature: add unit tests)
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 export const renderWithProviders = (component, authContextValue) => {
   const Wrapper = ({ children }) => (
@@ -23,7 +22,6 @@ export const renderWithProviders = (component, authContextValue) => {
   render(component, { wrapper: Wrapper });
 };
 
-<<<<<<< HEAD
 export const renderWithProvidersAndRouter = (children, authContextValue) => {
   const history = createMemoryHistory();
   const component = (
@@ -32,7 +30,7 @@ export const renderWithProvidersAndRouter = (children, authContextValue) => {
     </Router>
   );
   render(component);
-=======
+}
 export const renderWithProvidersRouter = (authContextValue) => {
   const router = createMemoryRouter(createRoutesFromElements(routerConfig), {
     initialEntries: ["/"],
@@ -45,7 +43,6 @@ export const renderWithProvidersRouter = (authContextValue) => {
     </ThemeProvider>
   );
   render(Component);
->>>>>>> e042f95 (feature: add unit tests)
 };
 
 export const mockAxiosClient = new MockAdapter(axiosClient);

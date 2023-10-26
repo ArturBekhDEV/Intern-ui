@@ -1,9 +1,6 @@
 import { screen, render, fireEvent } from "@testing-library/react";
 import { AuthProvider } from "@/context/context";
 import { useAuth } from "@/context/hook";
-
-import { renderWithProviders } from "@tests/utils";
-
 const childrenMockDataTestID = "children-mock";
 
 const childrenMock = (
@@ -94,10 +91,10 @@ describe("AuthProvider", () => {
       </AuthProvider>
     );
 
-    const button = screen.getByTestId("btn");
+    const button = screen.getByTestId('btn')
 
-    expect(button).toBeInTheDocument();
+    expect(button).toBeInTheDocument()
 
-    fireEvent.click(button);
+    fireEvent.click(button)
   });
 });

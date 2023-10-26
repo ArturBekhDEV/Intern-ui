@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-import { renderWithProvidersAndRouter } from "../../setup/utils";
+import { renderWithProvidersAndRouter } from "@tests/utils";
 import { screen, fireEvent } from "@testing-library/react";
 import Home from "@/pages/Home/Home";
 import React from "react";
-=======
-import { renderWithProvidersRouter } from "../../setup/utils";
-import { screen } from "@testing-library/react";
->>>>>>> e042f95 (feature: add unit tests)
 
 const mockedContextValue = {
   setAuth: (role, firstName) => {
@@ -18,7 +13,6 @@ const mockedContextValue = {
   },
 };
 
-<<<<<<< HEAD
 const adminMockedState = {
   state: {
     isAuth: true,
@@ -37,8 +31,6 @@ const userMockedState = {
   },
 };
 
-=======
->>>>>>> e042f95 (feature: add unit tests)
 jest.mock("@/utils/getEnv", () => ({
   async getEnv() {
     jest.fn(() => ({
@@ -55,22 +47,14 @@ jest.mock("react", () => ({
 
 describe("Home", () => {
   it("should render UserHome page if user role is USER", () => {
-<<<<<<< HEAD
     renderWithProvidersAndRouter(<Home />, {
       ...mockedContextValue,
       ...userMockedState,
-=======
-    renderWithProvidersRouter({
-      ...mockedContextValue,
-      isAuth: true,
-      role: "USER",
->>>>>>> e042f95 (feature: add unit tests)
-    });
+    })
 
     const userHomePage = screen.getByTestId("user-home-page");
     expect(userHomePage).toBeInTheDocument();
   });
-<<<<<<< HEAD
 
   it("should render AdminHome page if user role is ADMIN", () => {
     renderWithProvidersAndRouter(<Home />, {
@@ -121,6 +105,4 @@ describe("Home", () => {
     const loader = screen.getByTestId("loader");
     expect(loader).toBeInTheDocument();
   });
-=======
->>>>>>> e042f95 (feature: add unit tests)
 });

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { styles } from "@/pages/SignUpPage/SignUpPage.styles";
 import { ToastContainer, toast } from "react-toastify";
 import SignUpForm from "@/components/SignUpForm/SignUpForm";
@@ -19,7 +20,13 @@ import { FormikHelpers } from "formik";
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { setAuth, state } = useAuth();
+
+  useEffect(() => {
+    if (state.isAuth) {
+      navigate("/");
+    }
+  }, []);
 
   const onError = (msg: string) => {
     toast.error(msg, baseToastifyConfig);

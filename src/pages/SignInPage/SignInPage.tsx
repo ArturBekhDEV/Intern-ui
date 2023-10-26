@@ -27,6 +27,7 @@ const SignInPage = () => {
 
   const onSuccess = (data?: SignInResponse) => {
     navigate("/");
+    window.location.reload()
     saveToStorage("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {

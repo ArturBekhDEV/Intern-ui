@@ -8,6 +8,8 @@ import { useAxios } from "@/hooks/use-axios";
 import { CurrentUserResponse } from "@/services/services.types";
 import { useState } from "react";
 import Loader from "@/components/Loader/Loader";
+import { toast } from "react-toastify";
+import { baseToastifyConfig } from "@/configs/toastify";
 
 const Home = () => {
   const { state, setUser, removeAuth } = useAuth();
@@ -18,11 +20,14 @@ const Home = () => {
     setLoading(false);
   };
 
-  const onError = () => {
+  const onError = (msg: string) => {
+    if (state.isAuth) toast.error(msg, baseToastifyConfig);
     setLoading(false);
   };
 
-  const onLogOut = () => removeAuth();
+  const onLogOut = () => {
+    removeAuth();
+  };
 
   useAxios({
     service: authService.currentUser,

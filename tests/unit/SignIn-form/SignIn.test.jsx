@@ -1,18 +1,24 @@
-import { render, fireEvent, screen } from "@testing-library/react";
-import SignIn from "@/components/sign-in-form/SignIn";
-import { FormikHelpers } from "formik";
+import { fireEvent, screen } from "@testing-library/react";
+import SignIn from "@/components/SignInForm/SignIn";
+import { renderWithProvidersAndRouter } from "@tests/utils";
 
-const mockedOnSubmit = async (
-  values: Record<string, string>,
-  helpers?: FormikHelpers<Record<string, string>>
-) => {
+const mockedOnSubmit = async (values, helpers) => {
   console.log(values);
   helpers?.resetForm();
 };
 
+jest.mock("@/utils/getEnv", () => ({
+  async getEnv() {
+    jest.fn(() => ({
+      apiUrl: "http://localhost:3001",
+      googleClientId: "test-google-client-id",
+    }));
+  },
+}));
+
 describe("SignIn", () => {
   beforeEach(() => {
-    render(<SignIn onSubmit={mockedOnSubmit} />);
+    renderWithProvidersAndRouter(<SignIn onSubmit={mockedOnSubmit} />);
   });
 
   it("renders all inputs properly", () => {

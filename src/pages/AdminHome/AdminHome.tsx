@@ -1,7 +1,7 @@
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { useAuth } from "@/context/hook";
 import { Box, Typography } from "@mui/material";
-import { FC, useState } from "react"
+import { FC, useState } from "react";
 import UserTable from "@/components/UserTable/UserTable";
 import { userService } from "@/services/user-service";
 import { baseToastifyConfig } from "@/configs/toastify";
@@ -17,6 +17,7 @@ import NewUserForm from "@/components/NewUserForm/NewUserForm";
 import { FormikHelpers } from "formik";
 import { useAxios } from "@/hooks/use-axios";
 import { usersService } from "@/services/users";
+import { CreateUserResponse } from "@/services/services.types";
 
 export interface AdminHomeProps {
   onLogOut: () => void;
@@ -56,7 +57,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   });
 
   const onSuccessUserCreation = (data?: CreateUserResponse) => {
-    toast.success(`User ${data?.email} was created`);
+    toast.success(`User ${data?.email} was created`, baseToastifyConfig);
   };
   const onErrorUserCreation = (msg: string) => {
     toast.error(msg);

@@ -17,7 +17,7 @@ const Modal: FC<ModalProps> = ({ children, isOpen, handleClose, ...props }) => {
       open={isOpen}
       {...props}
       data-testid="modal"
-    >
+      >
       <Box sx={styles.root}>{children}</Box>
     </MUIModal>
   );

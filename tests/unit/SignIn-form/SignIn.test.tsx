@@ -1,9 +1,18 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import SignIn from "@/components/sign-in-form/SignIn";
+import { FormikHelpers } from "formik";
 
-describe("WelcomePage", () => {
+const mockedOnSubmit = async (
+  values: Record<string, string>,
+  helpers?: FormikHelpers<Record<string, string>>
+) => {
+  console.log(values);
+  helpers?.resetForm();
+};
+
+describe("SignIn", () => {
   beforeEach(() => {
-    render(<SignIn />);
+    render(<SignIn onSubmit={mockedOnSubmit} />);
   });
 
   it("renders all inputs properly", () => {

@@ -7,7 +7,7 @@ import { authService } from "@/services/auth";
 import { useAxios } from "@/hooks/use-axios";
 import { CurrentUserResponse } from "@/services/services.types";
 import { useState } from "react";
-import { CircularProgress } from "@mui/material";
+import Loader from "@/components/Loader/Loader";
 
 const Home = () => {
   const { state, setUser } = useAuth();
@@ -18,12 +18,19 @@ const Home = () => {
     setLoading(false);
   };
 
+  const onError = () => {
+    setLoading(false);
+  };
+
   useAxios({
     service: authService.currentUser,
     onSuccess,
+    onError,
     requestOnRender: true,
   });
-  
+
+  if (loading) return <Loader />;
+
   if (state.isAuth && state.role == Roles.Admin) {
     return <AdminHome />;
   }
@@ -31,7 +38,7 @@ const Home = () => {
     return <UserHome />;
   }
 
-  return loading ? <CircularProgress /> : <WelcomePage />;
+  return <WelcomePage />;
 };
 
 export default Home;

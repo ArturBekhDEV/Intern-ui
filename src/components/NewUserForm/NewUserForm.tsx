@@ -21,7 +21,7 @@ interface NewUserFormProps {
 
 const NewUserForm: FC<NewUserFormProps> = ({ onSubmit }) => {
   const selectorOptions = selectorInput.items.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
+    <MenuItem data-testid='selector-option' key={option.value} value={option.value}>
       {option.name}
     </MenuItem>
   ));
@@ -49,6 +49,8 @@ const NewUserForm: FC<NewUserFormProps> = ({ onSubmit }) => {
                       name={selectorInput.id}
                       id={selectorInput.id}
                       select
+                      data-testid="selector"
+                      inputProps={{ 'data-testid': "selector" }}
                       label={selectorInput.placeholder}
                       value={values.role}
                       onChange={handleChange}

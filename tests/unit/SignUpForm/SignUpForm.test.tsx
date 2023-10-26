@@ -1,5 +1,5 @@
 import SignUpForm from "@/components/SignUpForm/SignUpForm";
-import { inputs } from "@/components/SignUpForm/SignUpForm.constants";
+import { authInputs } from "@/constants/validations";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FormikHelpers } from "formik";
 
@@ -12,7 +12,7 @@ const mockedInputCorrectValues: Record<string, string> = {
   password: "SomeTest1!",
   confirmPassword: "SomeTest1!",
 };
-const inputsPlaceholders = inputs.map((i) => i.placeholder);
+const inputsPlaceholders = authInputs.map((i) => i.placeholder);
 
 const mockedOnSubmit = async (
   values: Record<string, string>,
@@ -56,7 +56,7 @@ describe("SignUpForm", () => {
 
   it("should show error helper text on firstName", async () => {
     const input = screen.getByPlaceholderText(
-      inputs.find((input) => input.id === "confirmPassword")!.placeholder
+      authInputs.find((input) => input.id === "confirmPassword")!.placeholder
     );
     await waitFor(() => {
       fireEvent.change(input, { target: { value: "We" } });

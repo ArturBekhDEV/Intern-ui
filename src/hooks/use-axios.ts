@@ -6,6 +6,7 @@ interface UseAxiosProps<T, D> {
   onError?: (error: string) => void;
   onSuccess?: (data?: D) => void;
   requestOnRender?: boolean;
+  params?: T;
 }
 
 export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
@@ -17,12 +18,14 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
       const response: AxiosResponse = await service(params);
 
       props.onSuccess && props.onSuccess(response?.data);
-
       return response?.data;
     } catch (error) {
       setError(true);
       if (error instanceof AxiosError) {
-        const errorMsg = error.response?.data?.message || error?.message || "Something went wrong. Please try again";
+        const errorMsg =
+          error.response?.data?.message ||
+          error?.message ||
+          "Something went wrong. Please try again";
         setErrorMsg(errorMsg);
         props.onError && props.onError(errorMsg);
       } else {
@@ -33,7 +36,7 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
     }
   };
   useEffect(() => {
-    props.requestOnRender && void request();
+    props.requestOnRender && void request(props?.params);
   }, []);
 
   return {

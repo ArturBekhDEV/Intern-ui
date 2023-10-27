@@ -2,22 +2,19 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Container } from "@mui/material";
 import { styles } from "./UserTable.styles";
 import { columns } from "./UserTable.constans";
-import { useState } from "react";
 import { dataRowType } from "./UserTable.constans";
 
 interface UserTableProps {
-  data: dataRowType[];
+  response: dataRowType[];
+  handleUserData: (data: dataRowType[] | null) => void;
 }
 
-const UserTable: React.FC<UserTableProps> = ({ data }) => {
-  const [selectedRows, setSelectedRows] = useState<dataRowType[]>([]);
-  console.log(selectedRows);
-
+const UserTable: React.FC<UserTableProps> = ({ response, handleUserData }) => {
   return (
     <Container sx={styles.root}>
       <DataGrid
         sx={styles.grid}
-        rows={data}
+        rows={response}
         columns={columns}
         initialState={{
           pagination: {
@@ -33,8 +30,10 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
         checkboxSelection
         onRowSelectionModelChange={(id) => {
           const selectedId = new Set(id);
-          const selectedRows = data.filter((data) => selectedId.has(data.id));
-          setSelectedRows(selectedRows);
+          const selectedRows = response.filter((data) =>
+            selectedId.has(data.id)
+          );
+          handleUserData(selectedRows);
         }}
       />
     </Container>

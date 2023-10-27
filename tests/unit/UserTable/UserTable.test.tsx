@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import UserTable from "@/components/user-table/UserTable";
+import UserTable from "@/components/UserTable/UserTable";
 
 const mockedData = [
   {

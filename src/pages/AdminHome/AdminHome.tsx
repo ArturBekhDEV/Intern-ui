@@ -1,7 +1,7 @@
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { useAuth } from "@/context/hook";
 import { Box, Typography } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import UserTable from "@/components/UserTable/UserTable";
 import { userService } from "@/services/user-service";
 import { baseToastifyConfig } from "@/configs/toastify";
@@ -25,10 +25,11 @@ export interface AdminHomeProps {
 
 const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   const { state } = useAuth();
-  const [userData, setUserData] = useState<UserResponse>();
-  const [_userTableData, setUserTableData] = useState<dataRowType[] | null>(
-    null
-  );
+  const [userData, setUserData] = useState<UserResponse>({
+    items: [],
+    counts: 0,
+  });
+  const [_chosenUsers, setChosenUsers] = useState<dataRowType[] | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"new-user" | "edit" | "">("");
 
@@ -37,18 +38,18 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     countPerPage: 10,
   };
 
-  const userDataTable = (data: dataRowType[] | null) => {
-    setUserTableData(data);
+  const handleUsers = (data: dataRowType[] | null) => {
+    setChosenUsers(data);
   };
 
   const onSuccess = (response?: UserResponse) => {
-    setUserData(response);
+    setUserData(response || { items: [], counts: 0 });
   };
   const onError = (msg: string) => {
     toast.error(msg, baseToastifyConfig);
   };
 
-  useAxios({
+  const { refetch } = useAxios({
     params,
     service: userService.getUsers,
     onSuccess,
@@ -58,6 +59,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
 
   const onSuccessUserCreation = (data?: CreateUserResponse) => {
     toast.success(`User ${data?.email} was created`, baseToastifyConfig);
+    void refetch();
   };
   const onErrorUserCreation = (msg: string) => {
     toast.error(msg);
@@ -128,11 +130,8 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
           </Box>
         </Box>
         <Box sx={{ marginTop: "30px" }}>
-          {userData ? (
-            <UserTable
-              response={userData.items}
-              handleUserData={userDataTable}
-            />
+          {userData.items.length ? (
+            <UserTable response={userData.items} handleUserData={handleUsers} />
           ) : (
             <Loader />
           )}

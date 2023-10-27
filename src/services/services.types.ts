@@ -40,6 +40,7 @@ export interface CurrentUserResponse {
 }
 export interface UserResponse {
   items: User[];
+  counts: number
 }
 export interface User {
   id: number;
@@ -47,6 +48,8 @@ export interface User {
   lastName: string;
   email: string;
   role: Roles;
+  createdAt: string
+  updatedAt: string
 }
 
 export interface GetUsersParams {
@@ -55,4 +58,6 @@ export interface GetUsersParams {
 }
 export interface CreateUserResponse extends CreateUserDto {
   id: string;
+  createdAt: string
+  updatedAt: string
 }

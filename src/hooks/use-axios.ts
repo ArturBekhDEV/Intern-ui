@@ -35,6 +35,11 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
       }
     }
   };
+
+  const refetch = async () => {
+    return await request(props?.params)
+  }
+
   useEffect(() => {
     props.requestOnRender && void request(props?.params);
   }, []);
@@ -43,5 +48,6 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
     request,
     error,
     errorMsg,
+    refetch
   };
 };

@@ -108,12 +108,16 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
       </Header>
       <PageWrapper breakpoint={"lg"}>
         <Box data-testid="admin-home-page" sx={styles.contentContainer}>
-          <AppButton onClick={handleOpenNewUser}>New user</AppButton>
-          <Modal isOpen={isOpen} handleClose={handleClose}>
-            {modalType == "new-user" && (
-              <NewUserForm onSubmit={onSubmitNewUser} />
-            )}
-          </Modal>
+          <AppButton onClick={handleOpenNewUser} data-testid="newUserBtn">
+            New user
+          </AppButton>
+          {isOpen && (
+            <Modal isOpen={isOpen} handleClose={handleClose}>
+              {modalType == "new-user" && (
+                <NewUserForm onSubmit={onSubmitNewUser} />
+              )}
+            </Modal>
+          )}
           <Box>
             <AppButton disabled sx={styles.editBtn}>
               Edit
@@ -123,14 +127,17 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
             </AppButton>
           </Box>
         </Box>
+        <Box sx={{ marginTop: "30px" }}>
+          {userData ? (
+            <UserTable
+              response={userData.items}
+              handleUserData={userDataTable}
+            />
+          ) : (
+            <Loader />
+          )}
+        </Box>
       </PageWrapper>
-      <Box sx={{ marginTop: "30px" }}>
-        {userData ? (
-          <UserTable response={userData.items} handleUserData={userDataTable} />
-        ) : (
-          <Loader />
-        )}
-      </Box>
       <ToastContainer />
     </>
   );

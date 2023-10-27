@@ -2,8 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import SignIn from "@/components/SignInForm/SignIn";
 import { renderWithProvidersAndRouter } from "@tests/utils";
 
-const mockedOnSubmit = async (values, helpers) => {
-  console.log(values);
+const mockedOnSubmit = async (_, helpers) => {
   helpers?.resetForm();
 };
 

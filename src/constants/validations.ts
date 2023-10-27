@@ -87,6 +87,16 @@ export const authInputs = [
   },
 ];
 
+export const newUserInputs = [
+  ...authInputs.slice(0, authInputs.length - 1),
+  {
+    id: "role",
+    label: "role",
+    placeholder: "Please choose a role",
+    required: true,
+  },
+];
+
 export const authInitialValues: Record<string, string> = {
   password: "",
   confirmPassword: "",
@@ -95,10 +105,19 @@ export const authInitialValues: Record<string, string> = {
   lastName: "",
 };
 
+export const newUserInitialValues: Record<string, string> = (({
+  confirmPassword: _,
+  ...restProperties
+}) => ({
+  ...restProperties,
+  role: "ADMIN",
+}))(authInitialValues);
+
 export const authInputTypes: Record<string, InputTypes> = {
   password: InputTypes.password,
   confirmPassword: InputTypes.password,
   email: InputTypes.email,
   firstName: InputTypes.text,
   lastName: InputTypes.text,
+  role: InputTypes.text,
 };

@@ -5,10 +5,10 @@ import { Box, MenuItem, TextField, Typography } from "@mui/material";
 import { styles } from "@/components/NewUserForm/NewUserForm.styles";
 import AppButton from "../AppButton/AppButton";
 import {
-  authInitialValues,
   authInputTypes,
-  authInputs,
   authValidationSchema,
+  newUserInitialValues,
+  newUserInputs,
 } from "@/constants/validations";
 import { selectorInput } from "./NewUserForm.constants";
 
@@ -21,7 +21,11 @@ interface NewUserFormProps {
 
 const NewUserForm: FC<NewUserFormProps> = ({ onSubmit }) => {
   const selectorOptions = selectorInput.items.map((option) => (
-    <MenuItem data-testid='selector-option' key={option.value} value={option.value}>
+    <MenuItem
+      data-testid="selector-option"
+      key={option.value}
+      value={option.value}
+    >
       {option.name}
     </MenuItem>
   ));
@@ -32,53 +36,37 @@ const NewUserForm: FC<NewUserFormProps> = ({ onSubmit }) => {
         Create a new user
       </Typography>
       <Formik
-        initialValues={authInitialValues}
+        initialValues={newUserInitialValues}
         onSubmit={onSubmit}
         validationSchema={authValidationSchema}
       >
-        {({ errors, touched, values, handleChange }) => (
+        {({ errors, touched }) => (
           <Form>
             <Box sx={styles.form}>
-              {authInputs.map((input) => {
-                if (input.id === "confirmPassword") {
-                  return (
-                    <TextField
-                      key={input.id}
-                      sx={styles.selectorInput}
-                      variant="outlined"
-                      name={selectorInput.id}
-                      id={selectorInput.id}
-                      select
-                      data-testid="selector"
-                      inputProps={{ 'data-testid': "selector" }}
-                      label={selectorInput.placeholder}
-                      value={values.role}
-                      onChange={handleChange}
-                      error={touched.role && Boolean(errors.role)}
-                      helperText={touched.role && errors.role}
-                    >
-                      {selectorOptions}
-                    </TextField>
-                  );
-                } else {
-                  return (
-                    <Field
-                      key={input.id}
-                      id={input.id}
-                      autoComplete="off"
-                      error={touched[input.id] && !!errors[input.id]}
-                      helperText={touched[input.id] && errors[input.id]}
-                      sx={styles.input}
-                      as={TextField}
-                      label={input.label}
-                      name={input.id}
-                      placeholder={input.placeholder}
-                      required={input.required}
-                      type={authInputTypes[input.id]}
-                      margin="dense"
-                    />
-                  );
-                }
+              {newUserInputs.map((input) => {
+                const selectOptions = input.id == "role" && {
+                  select: true,
+                  children: selectorOptions,
+                  sx: styles.selectorInput
+                };
+                return (
+                  <Field
+                    key={input.id}
+                    id={input.id}
+                    autoComplete="off"
+                    error={touched[input.id] && !!errors[input.id]}
+                    helperText={touched[input.id] && errors[input.id]}
+                    sx={styles.input}
+                    as={TextField}
+                    label={input.label}
+                    name={input.id}
+                    placeholder={input.placeholder}
+                    required={input.required}
+                    type={authInputTypes[input.id]}
+                    margin="dense"
+                    {...selectOptions}
+                  />
+                );
               })}
               <AppButton
                 type="submit"

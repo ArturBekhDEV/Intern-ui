@@ -147,33 +147,4 @@ describe("AdminHome", () => {
       });
     });
   });
-
-  it("should show success notification on users deletion", async () => {
-    React.useState = jest.fn();
-    
-    // Set the initial value for count3
-    React.useState
-      .mockReturnValueOnce([
-        {
-          items: [
-            {
-              id: "dwdwdwdwdwdw-dwdwdwd-dwdw",
-              firstName: "Jordan",
-              lastName: "Belfort",
-              email: "jordanbelfort@gmail.com",
-              role: "ADMIN",
-            },
-          ],
-          counts: 0,
-        },
-        jest.fn(),
-      ])
-      .mockReturnValueOnce([[], jest.fn()])
-      .mockReturnValueOnce([false, jest.fn()])
-      .mockReturnValueOnce(['', jest.fn()])
-    
-    // const checkbox = screen.getAllByLabelText("Select row");
-    // console.log(checkbox);
-    expect(true).toBe(true);
-  });
 });

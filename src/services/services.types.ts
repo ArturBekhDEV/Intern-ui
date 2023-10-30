@@ -43,7 +43,7 @@ export interface UserResponse {
   counts: number
 }
 export interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

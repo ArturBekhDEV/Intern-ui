@@ -40,14 +40,14 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     countPerPage: 10,
   };
 
-  const onSuccessUserDeletion = () => {
-    toast.success('Users were successfully deleted', baseToastifyConfig)
-  }
-
   const onError = (msg: string) => {
     toast.error(msg, baseToastifyConfig);
   };
 
+  const onSuccessUserDeletion = () => {
+    toast.success('Users were successfully deleted', baseToastifyConfig)
+    void refetch()
+  }
 
   const { request } = useAxios({
     service: userService.deleteUsers,
@@ -76,6 +76,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     requestOnRender: true,
   });
 
+
   const onSuccessUserCreation = (data?: CreateUserResponse) => {
     toast.success(`User ${data?.email} was created`, baseToastifyConfig);
     void refetch();
@@ -84,7 +85,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   const { request: createUser } = useAxios({
     service: usersService.createUser,
     onSuccess: onSuccessUserCreation,
-    onError: onError,
+    onError,
   });
 
   const handleOpenNewUser = () => {

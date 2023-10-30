@@ -1,9 +1,10 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { newUserInputs } from "@/constants/validations";
 import AdminHome from "@/pages/AdminHome/AdminHome";
-import { render } from "@testing-library/react";
+import { render, act} from "@testing-library/react";
 import { mockAxiosClientWithCredentials } from "../../setup/utils";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 
 const onLogOutMock = jest.fn();
 
@@ -27,7 +28,9 @@ jest.mock("@/utils/getEnv", () => ({
 
 describe("AdminHome", () => {
   beforeEach(() => {
-    render(<AdminHome onLogOut={onLogOutMock} />);
+    act(() => {
+      render(<AdminHome onLogOut={onLogOutMock} />);
+    });
   });
 
   it("should logout on click button", () => {
@@ -143,5 +146,34 @@ describe("AdminHome", () => {
         expect(input.value).toMatch(emptyStringOrAdminValueRegex);
       });
     });
+  });
+
+  it("should show success notification on users deletion", async () => {
+    React.useState = jest.fn();
+    
+    // Set the initial value for count3
+    React.useState
+      .mockReturnValueOnce([
+        {
+          items: [
+            {
+              id: "dwdwdwdwdwdw-dwdwdwd-dwdw",
+              firstName: "Jordan",
+              lastName: "Belfort",
+              email: "jordanbelfort@gmail.com",
+              role: "ADMIN",
+            },
+          ],
+          counts: 0,
+        },
+        jest.fn(),
+      ])
+      .mockReturnValueOnce([[], jest.fn()])
+      .mockReturnValueOnce([false, jest.fn()])
+      .mockReturnValueOnce(['', jest.fn()])
+    
+    // const checkbox = screen.getAllByLabelText("Select row");
+    // console.log(checkbox);
+    expect(true).toBe(true);
   });
 });

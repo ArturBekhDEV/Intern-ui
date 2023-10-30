@@ -79,7 +79,8 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               Delete
             </AppButton>
           </Box>
-          <Box sx={{ marginTop: "30px" }}>
+        </Box>
+        <Box sx={{ marginTop: "30px" }}>
             {userData ? (
               <UserTable
                 response={userData.items}
@@ -89,7 +90,6 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               <Loader />
             )}
           </Box>
-        </Box>
       </PageWrapper>
       <ToastContainer />
     </>

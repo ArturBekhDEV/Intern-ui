@@ -12,4 +12,5 @@ export const axiosClientWithCredentials = axios.create({
     Authorization: `Bearer ${getFromStorage('token')}`
   },
   withCredentials: true
+  
 })

@@ -10,8 +10,6 @@ import { createMemoryRouter } from "react-router-dom";
 import { createRoutesFromElements } from "react-router-dom";
 import { routerConfig } from "@/routes";
 import { RouterProvider } from "react-router-dom";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
 
 export const renderWithProviders = (component, authContextValue) => {
   const Wrapper = ({ children }) => (
@@ -35,7 +33,7 @@ export const renderWithProvidersRouter = (authContextValue) => {
   const router = createMemoryRouter(createRoutesFromElements(routerConfig), {
     initialEntries: ["/"],
   });
-  const Component = () => (
+  const Component =  (
     <ThemeProvider theme={theme}>
       <AuthProvider value={authContextValue}>
         <RouterProvider router={router} />

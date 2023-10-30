@@ -20,7 +20,7 @@ const mockedData = [
 
 describe("UserTable", () => {
   it("Renders table and checks selecting rows", () => {
-    render(<UserTable data={mockedData} />);
+    render(<UserTable handleUserData={() => {}} response={mockedData} />);
 
     const table = screen.getByRole("grid");
     expect(table).toBeInTheDocument();

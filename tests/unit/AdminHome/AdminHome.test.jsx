@@ -23,8 +23,10 @@ describe("AdminHome", () => {
 
   it("should logout on click button", () => {
     const logoutBtn = screen.getByTestId("logoutBtn");
-    fireEvent.click(logoutBtn);
+    act(() => {
+      fireEvent.click(logoutBtn);
 
-    expect(onLogOutMock).toHaveBeenCalled();
+      expect(onLogOutMock).toHaveBeenCalled();
+    });
   });
 });

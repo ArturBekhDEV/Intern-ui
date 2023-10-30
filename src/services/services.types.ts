@@ -17,6 +17,10 @@ export interface SignUpDto {
   confirmPassword: string;
 }
 
+export interface CreateUserDto extends Omit<SignUpDto, "confirmPassword"> {
+  role: Roles | string;
+}
+
 export interface SignUpResponse {
   token: string;
   role: Roles;
@@ -36,6 +40,7 @@ export interface CurrentUserResponse {
 }
 export interface UserResponse {
   items: User[];
+  counts: number
 }
 export interface User {
   id: number;
@@ -43,9 +48,16 @@ export interface User {
   lastName: string;
   email: string;
   role: Roles;
+  createdAt: string
+  updatedAt: string
 }
 
 export interface GetUsersParams {
   page?: number;
   countPerPage?: number;
+}
+export interface CreateUserResponse extends CreateUserDto {
+  id: string;
+  createdAt: string
+  updatedAt: string
 }

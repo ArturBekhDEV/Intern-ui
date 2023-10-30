@@ -4,11 +4,11 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 import { styles } from "@/components/SignUpForm/SignUpForm.styles";
 import {
-  initialValues,
-  inputTypes,
-  inputs,
-  validationSchema,
-} from "@/components/SignUpForm/SignUpForm.constants";
+  authInputs,
+  authValidationSchema,
+  authInitialValues,
+  authInputTypes
+} from "@/constants/validations";
 import { FC } from "react";
 import AppButton from "../AppButton/AppButton";
 
@@ -30,14 +30,14 @@ const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
         Register for your new account.
       </Typography>
       <Formik
-        initialValues={initialValues}
+        initialValues={authInitialValues}
         onSubmit={onSubmit}
-        validationSchema={validationSchema}
+        validationSchema={authValidationSchema}
       >
         {({ errors, touched }) => (
           <Form>
             <Box sx={styles.form}>
-              {inputs.map((input) => (
+              {authInputs.map((input) => (
                 <Field
                   key={input.id}
                   id={input.id}
@@ -50,7 +50,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
                   name={input.id}
                   placeholder={input.placeholder}
                   required={input.required}
-                  type={inputTypes[input.id]}
+                  type={authInputTypes[input.id]}
                   margin="dense"
                 />
               ))}

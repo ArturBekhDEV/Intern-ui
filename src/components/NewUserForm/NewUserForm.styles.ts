@@ -18,6 +18,31 @@ export const styles = {
     justifyContent: "center",
     width: "100%",
   },
+  selectorInput: {
+    width: "550px",
+    "@media (max-width: 600px)": {
+      width: "300px",
+    },
+    "& input": {
+      color: palette.basic.grey,
+      backgroundColor: palette.basic.light,
+    },
+    mb: "25px",
+    "& .MuiInputLabel-root": {
+      color: palette.basic.grey,
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: palette.basic.white,
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover:not(.Mui-focused) fieldset": {
+        borderColor: palette.basic.grey,
+      },
+    },
+    "& .MuiOutlinedInput-input": {
+      color: palette.basic.grey
+    },
+  },
   input: {
     width: "550px",
     "@media (max-width: 600px)": {
@@ -50,7 +75,6 @@ export const styles = {
   },
   title: {
     color: palette.primary[600],
-    mb: 3
   },
   description: {
     fontSize: "16px",

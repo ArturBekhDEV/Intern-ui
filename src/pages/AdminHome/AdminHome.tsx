@@ -130,7 +130,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
           </Box>
         </Box>
         <Box sx={{ marginTop: "30px" }}>
-          {userData.items.length ? (
+          {userData?.items?.length ? (
             <UserTable response={userData.items} handleUserData={handleUsers} />
           ) : (
             <Loader />

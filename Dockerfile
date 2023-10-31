@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY . . /app/
 
-RUN npm i -g pnpm
+COPY package.json package.json
 
-RUN pnpm install
+RUN npm install
 
-RUN pnpm build
+RUN npm build
 
 # Prod
 FROM nginx:stable-alpine

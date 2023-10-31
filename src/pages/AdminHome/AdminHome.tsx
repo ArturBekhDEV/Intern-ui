@@ -1,7 +1,7 @@
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { useAuth } from "@/context/hook";
 import { Box, Typography } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import UserTable from "@/components/UserTable/UserTable";
 import { userService } from "@/services/user-service";
 import { baseToastifyConfig } from "@/configs/toastify";
@@ -18,6 +18,7 @@ import { FormikHelpers } from "formik";
 import { useAxios } from "@/hooks/use-axios";
 import { usersService } from "@/services/users";
 import { CreateUserResponse } from "@/services/services.types";
+import EditUserForm from "@/components/EditUserForm/EditUserForm";
 
 export interface AdminHomeProps {
   onLogOut: () => void;
@@ -29,7 +30,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     items: [],
     counts: 0,
   });
-  const [_chosenUsers, setChosenUsers] = useState<dataRowType[] | null>(null);
+  const [_chosenUsers, setChosenUsers] = useState<dataRowType[]>([]);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"new-user" | "edit" | "">("");
 
@@ -38,7 +39,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     countPerPage: 10,
   };
 
-  const handleUsers = (data: dataRowType[] | null) => {
+  const handleUsers = (data: dataRowType[]) => {
     setChosenUsers(data);
   };
 
@@ -73,6 +74,10 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
 
   const handleOpenNewUser = () => {
     setModalType("new-user");
+    setOpen(true);
+  };
+  const handleOpenEditUser = () => {
+    setModalType("edit");
     setOpen(true);
   };
 
@@ -121,9 +126,21 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
             </Modal>
           )}
           <Box>
-            <AppButton disabled sx={styles.editBtn}>
+            <AppButton
+              disabled={!_chosenUsers || _chosenUsers.length !== 1}
+              sx={styles.editBtn}
+              onClick={handleOpenEditUser}
+            >
               Edit
             </AppButton>
+            {isOpen && modalType === "edit" && (
+              <Modal isOpen={isOpen} handleClose={handleClose}>
+                <EditUserForm
+                  onSubmit={async () => console.log("hello")}
+                  userData={_chosenUsers}
+                />
+              </Modal>
+            )}
             <AppButton disabled sx={styles.deleteBtn}>
               Delete
             </AppButton>

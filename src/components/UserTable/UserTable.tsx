@@ -6,7 +6,7 @@ import { dataRowType } from "./UserTable.constans";
 
 interface UserTableProps {
   response: dataRowType[];
-  handleUserData: (data: dataRowType[] | null) => void;
+  handleUserData: (data: dataRowType[]) => void;
 }
 
 const UserTable: React.FC<UserTableProps> = ({ response, handleUserData }) => {

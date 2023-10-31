@@ -12,7 +12,12 @@ interface ModalProps
 
 const Modal: FC<ModalProps> = ({ children, isOpen, handleClose, ...props }) => {
   return (
-    <MUIModal onClose={handleClose} open={isOpen} {...props} data-testid='modal'>
+    <MUIModal
+      onClose={handleClose}
+      open={isOpen}
+      {...props}
+      data-testid="modal"
+    >
       <Box sx={styles.root}>{children}</Box>
     </MUIModal>
   );

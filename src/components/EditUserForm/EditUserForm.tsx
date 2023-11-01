@@ -1,28 +1,27 @@
 import { FC } from "react";
-
+import { FormikHelpers } from "formik";
 import { Field, Form, Formik } from "formik";
 import { selectorInput } from "./EditUserForm.constants";
 import AppButton from "../AppButton/AppButton";
 import { Box, MenuItem, TextField, Typography } from "@mui/material";
 import { styles } from "./EditUserForm.styles";
 import { dataRowType } from "@/components/UserTable/UserTable.constans";
-
+import { createEditUserInputs } from "@/components/EditUserForm/EditUserValidations";
 import {
   editInputTypes,
   editValidationSchema,
 } from "@/components/EditUserForm/EditUserValidations";
 
-interface NewUserFormProps {
-  onSubmit: () => // values: Record<string, string>,
-  // helpers?: FormikHelpers<Record<string, string>>
-  Promise<void>;
+interface EditUserFormProps {
+  onSubmit: (
+    values: Record<string, string>,
+    helpers?: FormikHelpers<Record<string, string>>,
+    uderId?: string
+  ) => Promise<void>;
   userData: dataRowType[];
 }
 
-const EditUserForm: FC<NewUserFormProps> = ({ onSubmit, userData }) => {
-    
-  //  винести той масив. едіт
-
+const EditUserForm: FC<EditUserFormProps> = ({ onSubmit, userData }) => {
   const editUserInitialValues: Record<string, string> = {
     email: userData[0].email,
     firstName: userData[0]?.firstName,
@@ -30,34 +29,7 @@ const EditUserForm: FC<NewUserFormProps> = ({ onSubmit, userData }) => {
     role: userData[0]?.role,
   };
 
-  console.log(editUserInitialValues);
-
-  const editUserInputs = [
-    {
-      id: "firstName",
-      label: "First name",
-      placeholder: userData[0].firstName,
-      required: true,
-    },
-    {
-      id: "lastName",
-      label: "Last name",
-      placeholder: userData[0].lastName,
-      required: false,
-    },
-    {
-      id: "email",
-      label: "Email",
-      placeholder: userData[0].email,
-      required: true,
-    },
-    {
-      id: "role",
-      required: true,
-      label: "Role",
-      placeholder: "Please choose a role",
-    },
-  ];
+  const editUserInputs = createEditUserInputs(userData);
 
   const selectorOptions = selectorInput.items.map((option) => (
     <MenuItem

@@ -3,9 +3,12 @@ import { useAuth } from "@/context/hook";
 import { Box, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import UserTable from "@/components/UserTable/UserTable";
-import { userService } from "@/services/user-service";
 import { baseToastifyConfig } from "@/configs/toastify";
-import { UserResponse, GetUsersParams } from "@/services/services.types";
+import {
+  UserResponse,
+  GetUsersParams,
+  UpdateUserResponse,
+} from "@/services/services.types";
 import Loader from "@/components/Loader/Loader";
 import { dataRowType } from "@/components/UserTable/UserTable.constans";
 import { ToastContainer, toast } from "react-toastify";
@@ -19,7 +22,7 @@ import { useAxios } from "@/hooks/use-axios";
 import { usersService } from "@/services/users";
 import { CreateUserResponse } from "@/services/services.types";
 import EditUserForm from "@/components/EditUserForm/EditUserForm";
-
+import { userService } from "@/services/user-service";
 export interface AdminHomeProps {
   onLogOut: () => void;
 }
@@ -45,20 +48,20 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   };
 
   const onSuccessUserDeletion = () => {
-    toast.success('Users were successfully deleted', baseToastifyConfig)
-    void refetch()
-  }
+    toast.success("Users were successfully deleted", baseToastifyConfig);
+    void refetch();
+  };
 
   const { request } = useAxios({
     service: userService.deleteUsers,
     onSuccess: onSuccessUserDeletion,
-    onError:onError
+    onError: onError,
   });
 
   const onDeleteUsers = () => {
-    const ids = chosenUsers.map( u => u.id)
-    void request(ids)
-  }
+    const ids = chosenUsers.map((u) => u.id);
+    void request(ids);
+  };
 
   const handleUsers = (data: dataRowType[]) => {
     setChosenUsers(data);
@@ -70,15 +73,18 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
 
   const { refetch } = useAxios({
     params,
-    service: userService.getUsers,
+    service: usersService.getUsers,
     onSuccess,
     onError,
     requestOnRender: true,
   });
 
-
   const onSuccessUserCreation = (data?: CreateUserResponse) => {
     toast.success(`User ${data?.email} was created`, baseToastifyConfig);
+    void refetch();
+  };
+  const onSuccessUserUpdate = (data?: UpdateUserResponse) => {
+    toast.success(`User ${data?.email} was updated`, baseToastifyConfig);
     void refetch();
   };
 
@@ -87,6 +93,22 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     onSuccess: onSuccessUserCreation,
     onError,
   });
+
+  const { request: updateUser } = useAxios({
+    service: usersService.updateUser,
+    onSuccess: onSuccessUserUpdate,
+    onError,
+  });
+
+  const onUpdateUser = async (
+    values: Record<string, string>,
+    helpers: FormikHelpers<Record<string, string>> | undefined
+  ) => {
+    const userId = chosenUsers[0].id.toString();
+    updateUser(values, userId);
+    helpers?.resetForm();
+    setOpen(false);
+  };
 
   const handleOpenNewUser = () => {
     setModalType("new-user");
@@ -108,6 +130,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   ) => {
     createUser(values);
     helpers?.resetForm();
+    setOpen(false);
   };
 
   return (
@@ -146,18 +169,20 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               disabled={!chosenUsers || chosenUsers.length !== 1}
               sx={styles.editBtn}
               onClick={handleOpenEditUser}
+              data-testid="editUser"
             >
               Edit
             </AppButton>
             {isOpen && modalType === "edit" && (
               <Modal isOpen={isOpen} handleClose={handleClose}>
-                <EditUserForm
-                  onSubmit={async () => console.log("hello")}
-                  userData={chosenUsers}
-                />
+                <EditUserForm onSubmit={onUpdateUser} userData={chosenUsers} />
               </Modal>
             )}
-            <AppButton onClick={onDeleteUsers} disabled={!chosenUsers.length} sx={styles.deleteBtn}>
+            <AppButton
+              onClick={onDeleteUsers}
+              disabled={!chosenUsers.length}
+              sx={styles.deleteBtn}
+            >
               Delete
             </AppButton>
           </Box>

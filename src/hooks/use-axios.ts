@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 interface UseAxiosProps<T, D> {
-  service: (params?: T) => Promise<AxiosResponse<D>>;
+  service: (params?: T, userId?: string) => Promise<AxiosResponse<D>>;
   onError?: (error: string) => void;
   onSuccess?: (data?: D) => void;
   requestOnRender?: boolean;
@@ -13,9 +13,12 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
   const [error, setError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const request = async (params?: T): Promise<AxiosResponse<D> | undefined> => {
+  const request = async (
+    params?: T,
+    userId?: string
+  ): Promise<AxiosResponse<D> | undefined> => {
     try {
-      const response: AxiosResponse = await service(params);
+      const response: AxiosResponse = await service(params, userId);
 
       props.onSuccess && props.onSuccess(response?.data);
       return response?.data;
@@ -37,8 +40,8 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
   };
 
   const refetch = async () => {
-    return await request(props?.params)
-  }
+    return await request(props?.params);
+  };
 
   useEffect(() => {
     props.requestOnRender && void request(props?.params);
@@ -48,6 +51,6 @@ export const useAxios = <T, D>({ service, ...props }: UseAxiosProps<T, D>) => {
     request,
     error,
     errorMsg,
-    refetch
+    refetch,
   };
 };

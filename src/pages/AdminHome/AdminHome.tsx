@@ -33,7 +33,6 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     items: [],
     counts: 0,
   });
-
   const [chosenUsers, setChosenUsers] = useState<dataRowType[]>([]);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"new-user" | "edit" | "">("");

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Field, Form, Formik, FormikHelpers } from "formik";
+import { Field, Form, Formik } from "formik";
 import { selectorInput } from "./EditUserForm.constants";
 import AppButton from "../AppButton/AppButton";
 import { Box, MenuItem, TextField, Typography } from "@mui/material";

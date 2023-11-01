@@ -1,6 +1,5 @@
 import UserHome from "@/pages/UserHome/UserHome";
-import { act } from "@testing-library/react-hooks";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, act } from "@testing-library/react";
 import { render } from "@testing-library/react";
 
 const onLogOutMock = jest.fn();

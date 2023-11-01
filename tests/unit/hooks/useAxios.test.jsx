@@ -1,7 +1,6 @@
 import React from "react";
 import { useAxios } from "@/hooks/use-axios";
-import { act } from "@testing-library/react-hooks";
-import { renderHook } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import { AxiosError } from "axios";
 
 const mockUseState = jest.spyOn(React, "useState");

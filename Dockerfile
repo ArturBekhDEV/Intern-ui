@@ -8,7 +8,7 @@ COPY package.json package.json
 
 RUN npm install --legacy-peer-deps
 
-RUN npm build
+RUN npm run build
 
 # Prod
 FROM nginx:stable-alpine

@@ -53,5 +53,6 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
     "vite-tsconfig-paths": "^4.2.1"
-  }
+  },
+  "proxy": "https://internapplication.me"
 }

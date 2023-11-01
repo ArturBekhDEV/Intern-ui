@@ -30,7 +30,8 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     items: [],
     counts: 0,
   });
-  const [_chosenUsers, setChosenUsers] = useState<dataRowType[]>([]);
+
+  const [chosenUsers, setChosenUsers] = useState<dataRowType[]>([]);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"new-user" | "edit" | "">("");
 
@@ -39,15 +40,32 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     countPerPage: 10,
   };
 
+  const onError = (msg: string) => {
+    toast.error(msg, baseToastifyConfig);
+  };
+
+  const onSuccessUserDeletion = () => {
+    toast.success('Users were successfully deleted', baseToastifyConfig)
+    void refetch()
+  }
+
+  const { request } = useAxios({
+    service: userService.deleteUsers,
+    onSuccess: onSuccessUserDeletion,
+    onError:onError
+  });
+
+  const onDeleteUsers = () => {
+    const ids = chosenUsers.map( u => u.id)
+    void request(ids)
+  }
+
   const handleUsers = (data: dataRowType[]) => {
     setChosenUsers(data);
   };
 
   const onSuccess = (response?: UserResponse) => {
     setUserData(response || { items: [], counts: 0 });
-  };
-  const onError = (msg: string) => {
-    toast.error(msg, baseToastifyConfig);
   };
 
   const { refetch } = useAxios({
@@ -58,18 +76,16 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     requestOnRender: true,
   });
 
+
   const onSuccessUserCreation = (data?: CreateUserResponse) => {
     toast.success(`User ${data?.email} was created`, baseToastifyConfig);
     void refetch();
-  };
-  const onErrorUserCreation = (msg: string) => {
-    toast.error(msg);
   };
 
   const { request: createUser } = useAxios({
     service: usersService.createUser,
     onSuccess: onSuccessUserCreation,
-    onError: onErrorUserCreation,
+    onError,
   });
 
   const handleOpenNewUser = () => {
@@ -127,7 +143,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
           )}
           <Box>
             <AppButton
-              disabled={!_chosenUsers || _chosenUsers.length !== 1}
+              disabled={!chosenUsers || chosenUsers.length !== 1}
               sx={styles.editBtn}
               onClick={handleOpenEditUser}
             >
@@ -137,11 +153,11 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               <Modal isOpen={isOpen} handleClose={handleClose}>
                 <EditUserForm
                   onSubmit={async () => console.log("hello")}
-                  userData={_chosenUsers}
+                  userData={chosenUsers}
                 />
               </Modal>
             )}
-            <AppButton disabled sx={styles.deleteBtn}>
+            <AppButton onClick={onDeleteUsers} disabled={!chosenUsers.length} sx={styles.deleteBtn}>
               Delete
             </AppButton>
           </Box>

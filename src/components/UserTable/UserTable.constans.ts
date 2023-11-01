@@ -42,7 +42,7 @@ export const columns: GridColDef[] = [
 ];
 
 export type dataRowType = {
-  id: number;
+  id: string;
   lastName: string;
   firstName: string;
   email: string;

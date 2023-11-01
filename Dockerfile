@@ -6,7 +6,7 @@ COPY . . /app/
 
 COPY package.json package.json
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 RUN npm build
 

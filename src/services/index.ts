@@ -8,7 +8,7 @@ export const axiosClient = axios.create({
 });
 
 export const axiosClientWithCredentials = axios.create({
-  baseURL: getEnv("apiUrl")
+  baseURL: getEnv("apiUrl"),
 });
 
 axiosClientWithCredentials.interceptors.response.use(
@@ -25,8 +25,8 @@ axiosClientWithCredentials.interceptors.response.use(
 
 axiosClientWithCredentials.interceptors.request.use((config) => {
   if (config.headers) {
-      config.headers.Authorization = `Bearer ${getFromStorage("accessToken")}`;
-      return config;
+    config.headers.Authorization = `Bearer ${getFromStorage("token")}`;
+    return config;
   }
   return config;
 });

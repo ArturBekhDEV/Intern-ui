@@ -24,7 +24,22 @@ describe("users service", () => {
     expect(result.status).toEqual(201);
     expect(result.data).toMatchObject({
       ...mockedUserData,
-      password: expect.any(String)
+      password: expect.any(String),
     });
+  });
+
+  it("should get all users successfully", async () => {
+    mockAxiosClientWithCredentials.onGet("/users").reply(200, [mockedUserData]);
+    const result = await usersService.getUsers({});
+
+    expect(result.status).toEqual(201);
+    expect(result.data.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("should delete users  successfully", async () => {
+    mockAxiosClientWithCredentials.onPost("/users/delete").reply(201);
+    const result = await usersService.deleteUsers({});
+
+    expect(result.status).toEqual(201);
   });
 });

@@ -14,7 +14,7 @@ import { SignUpResponse } from "@/services/services.types";
 import { baseToastifyConfig } from "@/configs/toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
-import { getFromStorage, saveToStorage } from "@/utils/local-storage";
+import { storage } from "@/utils/local-storage";
 import { SuccessfulSignInMsg } from "@/constants/response-messages";
 import { FormikHelpers } from "formik";
 
@@ -23,7 +23,7 @@ const SignInPage = () => {
   const { setAuth } = useAuth();
 
   const isAuth = () => {
-    const isExistingToken = getFromStorage('token')
+    const isExistingToken = storage.get('token')
     return !!isExistingToken
   }
 
@@ -40,7 +40,7 @@ const SignInPage = () => {
   const onSuccess = (data?: SignUpResponse) => {
     navigate("/");
     window.location.reload()
-    saveToStorage("token", data?.token);
+    storage.save("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {
       toast.success(SuccessfulSignInMsg, baseToastifyConfig);

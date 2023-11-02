@@ -31,8 +31,8 @@ describe("SignIn", () => {
   });
 
   it("Submits the form and resets it", async () => {
-    const emailInput = screen.getByPlaceholderText("Enter your email");
-    const passwordInput = screen.getByPlaceholderText("Enter your password");
+    let emailInput = screen.getByPlaceholderText("Enter your email");
+    let passwordInput = screen.getByPlaceholderText("Enter your password");
     const submitButton = screen.getByText("Sign In");
 
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
@@ -42,7 +42,8 @@ describe("SignIn", () => {
 
     await screen.findByPlaceholderText("Enter your email");
     await screen.findByPlaceholderText("Enter your password");
-
+    emailInput = screen.getByPlaceholderText("Enter your email");
+    passwordInput = screen.getByPlaceholderText("Enter your password");
     expect(emailInput).toHaveValue("");
     expect(passwordInput).toHaveValue("");
   });

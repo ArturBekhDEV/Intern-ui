@@ -1,7 +1,7 @@
 import { getEnv } from "@/utils/getEnv";
 import { getFromStorage } from "@/utils/local-storage";
 import { removeFromStorage } from "@/utils/local-storage";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export const axiosClient = axios.create({
   baseURL: getEnv("apiUrl"),
@@ -16,7 +16,7 @@ axiosClientWithCredentials.interceptors.response.use(
     return config;
   },
   (error) => {
-    if (error.response.statusCode === 401) {
+    if (error?.response?.statusCode === 401 || error?.response?.status === 401) {
       removeFromStorage("token");
     }
     throw error;

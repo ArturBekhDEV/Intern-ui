@@ -113,8 +113,6 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     setOpen(true);
   };
   const handleOpenEditUser = () => {
-    console.log('open modal edit');
-    
     setModalType("edit");
     setOpen(true);
   };

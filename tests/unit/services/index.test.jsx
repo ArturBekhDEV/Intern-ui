@@ -1,7 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 
-// Import your axiosClientWithCredentials and the function getFromStorage
-import { axiosClientWithCredentials } from "@/services"; // Import your Axios instance
+import { axiosClientWithCredentials } from "@/services";
 import { storage } from '@/utils/local-storage'
 
 const mock = new MockAdapter(axiosClientWithCredentials);

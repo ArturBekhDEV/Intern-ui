@@ -1,5 +1,4 @@
 import { usersService } from "@/services/users";
-// import { mockAxiosClientWithCredentials } from "../../setup/utils";
 import MockAdapter from "axios-mock-adapter";
 import { axiosClientWithCredentials } from "@/services";
 

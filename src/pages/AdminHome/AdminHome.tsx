@@ -113,6 +113,8 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
     setOpen(true);
   };
   const handleOpenEditUser = () => {
+    console.log('open modal edit');
+    
     setModalType("edit");
     setOpen(true);
   };
@@ -180,6 +182,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               onClick={onDeleteUsers}
               disabled={!chosenUsers.length}
               sx={styles.deleteBtn}
+              data-testid='deleteBtn'
             >
               Delete
             </AppButton>

@@ -2,9 +2,13 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { newUserInputs } from "@/constants/validations";
 import AdminHome from "@/pages/AdminHome/AdminHome";
 import { render, act } from "@testing-library/react";
-import { mockAxiosClientWithCredentials, renderWithProvidersAndRouter } from "../../setup/utils";
+import {
+  mockAxiosClientWithCredentials,
+  renderWithProvidersAndRouter,
+} from "../../setup/utils";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { createEditUserInputs } from "@/components/EditUserForm/EditUserValidations";
 
 const onLogOutMock = jest.fn();
 
@@ -16,6 +20,22 @@ const mockedInputCorrectValues = {
   role: "ADMIN",
 };
 const inputsPlaceholders = newUserInputs.map((i) => i.placeholder);
+
+const mockedUserInTable = {
+  createdAt: "2023-11-02T11:18:36.670Z",
+  email: "artbekh94@gmail.com",
+  firstName: "Artur",
+  id: "e316e965-62c7-49a7-aeca-8fe3cbe96fec",
+  lastName: "Bekh",
+  password:
+    "52d4363c2d25cca956ecb0c1187583bd0395bcc3c37649c996fed6f7699f54e349829a906866ae51f531cc4f388b090e8fcf4bc858fd7d46d53fe6c8826000f3:5df861",
+  role: "ADMIN",
+  updatedAt: "2023-11-02T11:18:36.670Z",
+};
+
+const editInputsPlaceholders = createEditUserInputs([mockedUserInTable])
+  .map((i) => i.placeholder)
+  .filter((p) => p !== "Please choose a role");
 
 jest.mock("@/utils/getEnv", () => ({
   async getEnv() {
@@ -140,45 +160,81 @@ describe("AdminHome", () => {
 
   describe("With table", () => {
     it("should update user", async () => {
-     act(() => {
-      renderWithProvidersAndRouter(<AdminHome onLogOut={onLogOutMock} />);
-     })
-        mockAxiosClientWithCredentials.onGet("/users").reply(200, {
-          items: [
-            {
-              createdAt: "2023-11-02T11:18:36.670Z",
-              email: "artbekh94@gmail.com",
-              firstName: "Artur",
-              id: "e316e965-62c7-49a7-aeca-8fe3cbe96fec",
-              lastName: "Bekh",
-              password:
-                "52d4363c2d25cca956ecb0c1187583bd0395bcc3c37649c996fed6f7699f54e349829a906866ae51f531cc4f388b090e8fcf4bc858fd7d46d53fe6c8826000f3:5df861",
-              role: "ADMIN",
-              updatedAt: "2023-11-02T11:18:36.670Z",
-            },
-          ],
-          counts: 1,
+      act(() => {
+        renderWithProvidersAndRouter(<AdminHome onLogOut={onLogOutMock} />);
+      });
+      mockAxiosClientWithCredentials.onGet("/users").reply(200, {
+        items: [mockedUserInTable],
+        counts: 1,
+      });
+      await waitFor(() => {
+        const table = screen.getByTestId("users-table");
+
+        expect(table).toBeInTheDocument();
+
+        const tableRows = screen.getAllByRole("row");
+        const tableRow = tableRows[1];
+
+        expect(tableRow).toBeInTheDocument();
+
+        fireEvent.click(tableRow);
+
+        const editBtn = screen.getByTestId("editUser");
+
+        fireEvent.click(editBtn);
+
+        const selectorPlaceholder = "Please choose a role";
+        const selector = screen.getByPlaceholderText(
+          new RegExp(selectorPlaceholder)
+        );
+        expect(selector).toBeInTheDocument();
+
+        const submitBtn = screen.getByTestId("submit-btn");
+        expect(submitBtn).toBeInTheDocument();
+
+        editInputsPlaceholders.forEach(async (key) => {
+          const input = screen.getByPlaceholderText(key);
+
+          await waitFor(() => {
+            fireEvent.change(input, {
+              target: { value: mockedUserInTable[input.id] },
+            });
+            expect(input).toHaveValue(mockedUserInTable[input.id]);
+          });
+
+          mockAxiosClientWithCredentials.onPatch("/users").reply(204);
+          fireEvent.click(submitBtn);
         });
-        await waitFor(() => {
-          const table = screen.getByTestId("users-table");
+      });
+    });
 
-          expect(table).toBeInTheDocument()
+    it("should delete user", async () => {
+      act(() => {
+        renderWithProvidersAndRouter(<AdminHome onLogOut={onLogOutMock} />);
+      });
+      mockAxiosClientWithCredentials.onGet("/users").reply(200, {
+        items: [mockedUserInTable],
+        counts: 1,
+      });
+      await waitFor(() => {
+        const table = screen.getByTestId("users-table");
 
-          const tableRows = screen.getAllByRole('row')
-          const tableRow = tableRows[1]
+        expect(table).toBeInTheDocument();
 
-          expect(tableRow).toBeInTheDocument()
+        const tableRows = screen.getAllByRole("row");
+        const tableRow = tableRows[1];
 
-          fireEvent.click(tableRow)
+        expect(tableRow).toBeInTheDocument();
 
-          const editBtn = screen.getByTestId('editUser')
+        fireEvent.click(tableRow);
 
-          fireEvent.click(editBtn)
-
-          // const modal = screen.getByTestId('modal')
-
-          // expect(modal).toBeInTheDocument()
-        })
+        const deleteBtn = screen.getByTestId("deleteBtn");
+        
+        expect(deleteBtn).toBeInTheDocument()
+        
+        mockAxiosClientWithCredentials.onPost("/users/delete").reply(201);
+        fireEvent.click(deleteBtn);
+      });
     });
   });
 });

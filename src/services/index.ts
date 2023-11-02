@@ -8,10 +8,7 @@ export const axiosClient = axios.create({
 });
 
 export const axiosClientWithCredentials = axios.create({
-  baseURL: getEnv("apiUrl"),
-  headers: {
-    Authorization: `Bearer ${getFromStorage("token")}`,
-  },
+  baseURL: getEnv("apiUrl")
 });
 
 axiosClientWithCredentials.interceptors.response.use(
@@ -25,3 +22,11 @@ axiosClientWithCredentials.interceptors.response.use(
     throw error;
   }
 );
+
+axiosClientWithCredentials.interceptors.request.use((config) => {
+  if (config.headers) {
+      config.headers.Authorization = `Bearer ${getFromStorage("accessToken")}`;
+      return config;
+  }
+  return config;
+});

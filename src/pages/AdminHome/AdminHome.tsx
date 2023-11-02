@@ -22,7 +22,6 @@ import { useAxios } from "@/hooks/use-axios";
 import { usersService } from "@/services/users";
 import { CreateUserResponse } from "@/services/services.types";
 import EditUserForm from "@/components/EditUserForm/EditUserForm";
-import { userService } from "@/services/user-service";
 export interface AdminHomeProps {
   onLogOut: () => void;
 }
@@ -52,7 +51,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
   };
 
   const { request } = useAxios({
-    service: userService.deleteUsers,
+    service: usersService.deleteUsers,
     onSuccess: onSuccessUserDeletion,
     onError: onError,
   });

@@ -25,4 +25,9 @@ export const usersService = {
   ): Promise<AxiosResponse<UserResponse>> => {
     return await axiosClientWithCredentials.get("/users", { params });
   },
+  deleteUsers: async (params?: string[]): Promise<AxiosResponse<void>> => {
+    return await axiosClientWithCredentials.post("/users/delete", {
+      id: params,
+    });
+  },
 };

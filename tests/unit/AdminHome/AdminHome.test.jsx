@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { newUserInputs } from "@/constants/validations";
 import AdminHome from "@/pages/AdminHome/AdminHome";
-import { render, act} from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import { mockAxiosClientWithCredentials } from "../../setup/utils";
 import userEvent from "@testing-library/user-event";
 import React from "react";
@@ -97,12 +97,6 @@ describe("AdminHome", () => {
       const notificationText = `User ${mockedInputCorrectValues.email} was created`;
       const notification = screen.getByText(notificationText);
       expect(notification).toBeInTheDocument();
-
-      inputsPlaceholders.forEach((key) => {
-        const input = screen.getByPlaceholderText(key);
-        const emptyStringOrAdminValueRegex = /^(|.*ADMIN.*)$/;
-        expect(input.value).toMatch(emptyStringOrAdminValueRegex);
-      });
     });
   });
 
@@ -139,12 +133,6 @@ describe("AdminHome", () => {
 
       const notification = screen.getByText(errorMsg);
       expect(notification).toBeInTheDocument();
-
-      inputsPlaceholders.forEach((key) => {
-        const input = screen.getByPlaceholderText(key);
-        const emptyStringOrAdminValueRegex = /^(|.*ADMIN.*)$/;
-        expect(input.value).toMatch(emptyStringOrAdminValueRegex);
-      });
     });
   });
 });

@@ -1,7 +1,7 @@
 import { getEnv } from "@/utils/getEnv";
 import { getFromStorage } from "@/utils/local-storage";
 import { removeFromStorage } from "@/utils/local-storage";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 export const axiosClient = axios.create({
   baseURL: getEnv("apiUrl"),

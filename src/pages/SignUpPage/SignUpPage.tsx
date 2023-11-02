@@ -14,16 +14,21 @@ import { SignUpResponse } from "@/services/services.types";
 import { baseToastifyConfig } from "@/configs/toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
-import { saveToStorage } from "@/utils/local-storage";
+import { getFromStorage, saveToStorage } from "@/utils/local-storage";
 import { SuccessfulSignInMsg } from "@/constants/response-messages";
 import { FormikHelpers } from "formik";
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const { setAuth, state } = useAuth();
+  const { setAuth } = useAuth();
+
+  const isAuth = () => {
+    const isExistingToken = getFromStorage('token')
+    return !!isExistingToken
+  }
 
   useEffect(() => {
-    if (state.isAuth) {
+    if (isAuth()) {
       navigate("/");
     }
   }, []);

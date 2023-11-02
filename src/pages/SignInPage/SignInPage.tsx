@@ -10,16 +10,28 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
 import { toast } from "react-toastify";
 import { baseToastifyConfig } from "@/configs/toastify";
-import { saveToStorage } from "@/utils/local-storage";
+import { getFromStorage, saveToStorage } from "@/utils/local-storage";
 import { SuccessfulSignInMsg } from "@/constants/response-messages";
 import { SignInResponse } from "@/services/services.types";
 import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
 import { FormikHelpers } from "formik";
+import { useEffect } from "react";
 
 const SignInPage = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
+
+  const isAuth = () => {
+    const isExistingToken = getFromStorage('token')
+    return !!isExistingToken
+  }
+
+  useEffect(() => {
+    if (isAuth()) {
+      navigate("/");
+    }
+  }, []);
 
   const onError = (msg: string) => {
     toast.error(msg, baseToastifyConfig);

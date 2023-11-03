@@ -1,6 +1,5 @@
 import { getEnv } from "@/utils/getEnv";
-import { getFromStorage } from "@/utils/local-storage";
-import { removeFromStorage } from "@/utils/local-storage";
+import { storage } from "@/utils/local-storage";
 import axios from "axios";
 
 export const axiosClient = axios.create({
@@ -9,9 +8,6 @@ export const axiosClient = axios.create({
 
 export const axiosClientWithCredentials = axios.create({
   baseURL: getEnv("apiUrl"),
-  headers: {
-    Authorization: `Bearer ${getFromStorage("token")}`,
-  },
 });
 
 axiosClientWithCredentials.interceptors.response.use(
@@ -19,9 +15,17 @@ axiosClientWithCredentials.interceptors.response.use(
     return config;
   },
   (error) => {
-    if (error.response.statusCode === 401) {
-      removeFromStorage("token");
+    if (error?.response?.body?.statusCode === 401 || error?.response?.status === 401) {
+      storage.remove("token");
     }
     throw error;
   }
 );
+
+axiosClientWithCredentials.interceptors.request.use((config) => {
+  if (config.headers) {
+    config.headers.Authorization = `Bearer ${storage.get("token")}`;
+    return config;
+  }
+  return config;
+});

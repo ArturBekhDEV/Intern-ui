@@ -5,11 +5,11 @@ import {
   InitialValues,
   Roles,
 } from "./types";
-import { getFromStorage, removeFromStorage } from "@/utils/local-storage";
+import { storage } from "@/utils/local-storage";
 
 const initialValues = {
   role: "",
-  isAuth: !!getFromStorage("token"),
+  isAuth: !!storage.get("token"),
   firstName: "",
   lastName: "",
 };
@@ -28,11 +28,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children, value }) => {
   const [state, setState] = useState<InitialValues>(initialValues);
 
   const setAuth = (role: Roles | string, firstName: string) => {
-    setState({ role, isAuth: !!getFromStorage("token"), firstName });
+    setState({ role, isAuth: !!storage.get("token"), firstName });
   };
 
   const removeAuth = () => {
-    removeFromStorage("token");
+    storage.remove("token");
     setState({ role: "", isAuth: false, firstName: "", lastName: "" });
   };
 

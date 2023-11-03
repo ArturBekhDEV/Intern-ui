@@ -28,6 +28,7 @@ const UserTable: React.FC<UserTableProps> = ({ response, handleUserData }) => {
         disableColumnSelector
         hideFooterSelectedRowCount
         checkboxSelection
+        data-testid='users-table'
         onRowSelectionModelChange={(id) => {
           const selectedId = new Set(id);
           const selectedRows = response.filter((data) =>

@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/context/hook";
 import TextField from "@mui/material/TextField";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Box from "@mui/material/Box";
@@ -19,15 +16,6 @@ interface SignInProps {
 }
 
 const SignIn: FC<SignInProps> = ({ onSubmit }) => {
-  const navigate = useNavigate();
-  const { state } = useAuth();
-
-  useEffect(() => {
-    if (state.isAuth) {
-      navigate("/");
-    }
-  }, []);
-
   const initialValues: Record<string, string> = {
     email: "",
     password: "",

@@ -5,7 +5,7 @@ import { useAxios } from "@/hooks/use-axios";
 import { authService } from "@/services/auth";
 import { GoogleAuthResponse } from "@/services/services.types";
 import { getEnv } from "@/utils/getEnv";
-import { saveToStorage } from "@/utils/local-storage";
+import { storage } from "@/utils/local-storage";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,7 +22,7 @@ const GoogleBtn = () => {
   const onSuccess = (data?: GoogleAuthResponse) => {
     navigate("/");
     window.location.reload()
-    saveToStorage("token", data?.token);
+    storage.save("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {
       toast.success(

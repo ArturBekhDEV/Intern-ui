@@ -1,4 +1,4 @@
-import { saveToStorage, getFromStorage, removeFromStorage } from "@/utils/local-storage";
+import { storage } from "@/utils/local-storage";
 
 describe("localStorage utils", () => {
   beforeEach(() => {
@@ -6,21 +6,21 @@ describe("localStorage utils", () => {
   });
 
   it("should save data to storage", () => {
-    saveToStorage("test", "test");
+    storage.save("test", "test");
     expect(localStorage.getItem("test")).toMatch(/test/);
   });
 
   it("should get data from storage", () => {
     localStorage.setItem("test", JSON.stringify("test"));
-    const data = getFromStorage("test");
+    const data = storage.get("test");
     expect(data).toMatch(/test/);
   });
 
   it('should remove data from storage', () => {
     localStorage.setItem("test", JSON.stringify("test"));
-    const data = getFromStorage("test");
+    const data = storage.get("test");
     expect(data).toMatch(/test/);
-    removeFromStorage('test')
+    storage.remove('test')
 
     expect(localStorage.getItem('test')).toBeNull()
   })

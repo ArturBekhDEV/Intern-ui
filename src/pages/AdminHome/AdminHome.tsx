@@ -180,6 +180,7 @@ const AdminHome: FC<AdminHomeProps> = ({ onLogOut }) => {
               onClick={onDeleteUsers}
               disabled={!chosenUsers.length}
               sx={styles.deleteBtn}
+              data-testid='deleteBtn'
             >
               Delete
             </AppButton>

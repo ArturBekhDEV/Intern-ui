@@ -15,7 +15,6 @@ import { baseToastifyConfig } from "@/configs/toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/hook";
 import { storage } from "@/utils/local-storage";
-import { getFromStorage, saveToStorage } from "@/utils/local-storage";
 import { SuccessfulSignInMsg } from "@/constants/response-messages";
 import { FormikHelpers } from "formik";
 
@@ -24,9 +23,9 @@ const SignInPage = () => {
   const { setAuth } = useAuth();
 
   const isAuth = () => {
-    const isExistingToken = storage.get('token')
-    return !!isExistingToken
-  }
+    const isExistingToken = storage.get("token");
+    return !!isExistingToken;
+  };
 
   useEffect(() => {
     if (isAuth()) {
@@ -40,7 +39,7 @@ const SignInPage = () => {
 
   const onSuccess = (data?: SignUpResponse) => {
     navigate("/");
-    window.location.reload()
+    window.location.reload();
     storage.save("token", data?.token);
     setAuth(data!.role, data!.firstName);
     setTimeout(() => {
@@ -56,7 +55,7 @@ const SignInPage = () => {
 
   const onSubmit = async (
     values: Record<string, string>,
-    helpers?: FormikHelpers<Record<string, string>>
+    helpers?: FormikHelpers<Record<string, string>>,
   ) => {
     await request(values);
     helpers?.resetForm();
